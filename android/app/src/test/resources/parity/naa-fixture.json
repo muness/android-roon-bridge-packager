@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "endpoints": [
+    {
+      "id": "fake-naa",
+      "displayName": "Fixture endpoint (single member)",
+      "vendor": "nobody",
+      "vendorVersion": "0.0-fixture",
+      "vendorArchive": {
+        "urlPattern": "file:fake-naa.deb",
+        "format": "deb",
+        "sha256ByVersion": {
+          "0.0-fixture": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "licence": {
+        "title": "Fixture",
+        "text": "Nothing is downloaded and nothing is anybody's."
+      },
+      "shell": {
+        "url": "file:fake-shell.apk",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "packageId": "io.github.muness.fixture",
+        "versionName": "0.0-fixture"
+      },
+      "packPlan": {
+        "kind": "single-member",
+        "nativeDir": "lib/arm64-v8a/",
+        "nativeAlignment": 4,
+        "removeEntries": ["lib/arm64-v8a/libnetworkaudiod_exec.so"],
+        "members": [
+          {
+            "path": "usr/sbin/networkaudiod",
+            "role": "executable",
+            "apkEntry": "lib/arm64-v8a/libnetworkaudiod_exec.so",
+            "requireElf": "aarch64"
+          }
+        ],
+        "assets": [
+          { "entry": "assets/runtime-variant", "value": "unpatched", "compress": true }
+        ],
+        "ownLibraries": ["libc_glibc.so"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "endpoints": [
+    {
+      "id": "fake-tree",
+      "displayName": "Fixture endpoint (tree)",
+      "vendor": "nobody",
+      "vendorVersion": "0.0-fixture",
+      "vendorArchive": {
+        "urlPattern": "file:fake-roon.tar.bz2",
+        "format": "tar.bz2",
+        "sha256ByVersion": {
+          "0.0-fixture": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "licence": {
+        "title": "Fixture",
+        "text": "Nothing is downloaded and nothing is anybody's."
+      },
+      "shell": {
+        "url": "file:tree-shell.apk",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "packageId": "io.github.muness.fixture.tree",
+        "versionName": "0.0-fixture"
+      },
+      "packPlan": {
+        "kind": "tree",
+        "nativeDir": "lib/arm64-v8a/",
+        "nativeAlignment": 4,
+        "renameSuffix": "_roon.so",
+        "treeAsset": "assets/roon-tree.zip",
+        "mapAsset": "assets/roon-exec-map.txt",
+        "entryAssembly": "RoonBridge.dll",
+        "versionFile": "VERSION",
+        "hostfxrName": "libhostfxr.so",
+        "apphostChildren": ["RAATServer", "RoonBridgeHelper"],
+        "apphostSupervisors": ["RoonBridge.exe", "RoonBridge"],
+        "ownLibraries": ["libld_glibc.so", "libc_glibc.so", "libroonhost_exec.so"],
+        "supplements": []
+      }
+    }
+  ]
+}

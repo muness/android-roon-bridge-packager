@@ -1,0 +1,99 @@
+plugins {
+    id "com.android.application"
+}
+
+// ---------------------------------------------------------------- versioning
+//
+// The same rule the other apps in this family use: a version passed by the
+// publish script, or `git describe`, and either way the short commit on the
+// end, so the one question that matters on a device with no adb -- "is the
+// build I am looking at the build I just made?" -- has an answer on screen.
+//
+//   -PappVersion=0.1-poc   what the publish script passes
+//   otherwise              git describe --tags --always --dirty
+
+static def gitOutput(File dir, List<String> command, String fallback) {
+    try {
+        def out = new ByteArrayOutputStream()
+        def process = new ProcessBuilder(command)
+                .directory(dir)
+                .redirectErrorStream(false)
+                .start()
+        process.inputStream.withStream { out << it }
+        return process.waitFor() == 0 ? out.toString("UTF-8").trim() : fallback
+    } catch (Exception ignored) {
+        return fallback
+    }
+}
+
+def repoRoot = rootProject.projectDir.parentFile
+def commitHash = gitOutput(repoRoot, ["git", "rev-parse", "--short=7", "HEAD"], "nogit")
+def describe = gitOutput(repoRoot,
+        ["git", "describe", "--tags", "--always", "--dirty"], commitHash)
+def versionBase = project.hasProperty("appVersion")
+        ? project.property("appVersion").toString().trim()
+        : describe
+if (versionBase.isEmpty()) {
+    versionBase = commitHash
+}
+def managerVersionName = versionBase.contains(commitHash)
+        ? versionBase
+        : versionBase + " (" + commitHash + ")"
+def commitCount = gitOutput(repoRoot, ["git", "rev-list", "--count", "HEAD"], "")
+def managerVersionCode = commitCount.isInteger() ? commitCount.toInteger() : 1
+
+android {
+    namespace "io.github.muness.roonpackager"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "io.github.muness.roonpackager"
+        minSdk 26
+        targetSdk 35
+        versionCode managerVersionCode
+        versionName managerVersionName
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+        // No signingConfig on purpose: this produces an unsigned APK, and
+        // whoever publishes it signs it with their own key.
+        release {
+            debuggable false
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // No native code of its own, and no vendor bytes ever: everything this app
+    // packs it downloaded to the device a moment earlier. See
+    // scripts/check-source-only.sh.
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // The archive readers: ar (.deb), tar, xz, bzip2. Pure Java, so the same
+    // code runs in the JVM tests and on the device.
+    implementation "org.apache.commons:commons-compress:1.27.1"
+    implementation "org.tukaani:xz:1.10"
+    // The library apksigner is built from. This is what makes signing on the
+    // device possible at all, and it is what ReVanced uses for the same reason.
+    implementation "com.android.tools.build:apksig:8.9.2"
+    implementation "com.google.code.gson:gson:2.11.0"
+
+    testImplementation "junit:junit:4.13.2"
+}

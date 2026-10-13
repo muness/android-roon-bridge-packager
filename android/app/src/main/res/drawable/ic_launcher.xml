@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A box with something going into it. No vendor's mark, and not anyone's logo. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M6,26 L24,34 L42,26 L42,40 L24,46 L6,40 Z" />
+    <path
+        android:fillColor="#4DB6AC"
+        android:pathData="M21,2 L27,2 L27,14 L34,14 L24,26 L14,14 L21,14 Z" />
+</vector>

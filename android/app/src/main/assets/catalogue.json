@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "endpoints": [
+    {
+      "id": "roon",
+      "displayName": "Roon Bridge",
+      "vendor": "Roon Labs",
+      "vendorVersion": "2.71-1683",
+      "endpointDiagnosticsPort": 48620,
+      "vendorArchive": {
+        "urlPattern": "https://download.roonlabs.com/builds/RoonBridge_linuxarmv8.tar.bz2",
+        "format": "tar.bz2",
+        "sha256ByVersion": {
+          "2.71-1683": "44154ce313dfc02801dd0e831e60d412cd9eaeb8cb931890e860101fabdf357a"
+        }
+      },
+      "licence": {
+        "title": "You are downloading Roon Labs' software",
+        "vendorUrl": "https://roon.app/en/termsandconditions",
+        "text": "This app does not contain Roon Bridge. Your device downloads it directly from Roon Labs and packs your copy locally into a separately downloaded app shell. The packager does not upload the archive or generated APK. Each copied file is checked for byte identity before installation.\n\nRoon's software terms apply to the download and its use. Those terms restrict copying, incorporation into other programs and providing copies to others. Downloading directly and preserving bytes do not establish permission to repackage. Proceed only if you have the necessary rights. Do not distribute the generated APK.\n\nThis independent experimental tool is not affiliated with, endorsed by, or approved by Roon Labs."
+      },
+      "shell": {
+        "url": "https://example.invalid/roon-shell.apk",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "packageId": "io.github.muness.roonbridge",
+        "versionName": "Not configured"
+      },
+      "packPlan": {
+        "kind": "tree",
+        "nativeDir": "lib/arm64-v8a/",
+        "nativeAlignment": 4,
+        "renameSuffix": "_roon.so",
+        "treeAsset": "assets/roon-tree.zip",
+        "mapAsset": "assets/roon-exec-map.txt",
+        "entryAssembly": "RoonBridge.dll",
+        "versionFile": "VERSION",
+        "hostfxrName": "libhostfxr.so",
+        "apphostChildren": [
+          "RAATServer",
+          "RoonBridgeHelper"
+        ],
+        "apphostSupervisors": [
+          "RoonBridge.exe",
+          "RoonBridge"
+        ],
+        "ownLibraries": [
+          "libld_glibc.so",
+          "libc_glibc.so",
+          "libm_glibc.so",
+          "libstdcxx_glibc.so",
+          "libgcc_s_glibc.so",
+          "libasound_glibc.so",
+          "libasound_module_pcm_androidnaa.so",
+          "libasound_module_ctl_androidnaa.so",
+          "libnaa_alsa_shim.so",
+          "libalsa_probe_exec.so",
+          "libandroidnaa_usb.so",
+          "libdirect_audiotrack.so",
+          "libroonhost_exec.so",
+          "libroon_compat_shim.so",
+          "libroonchild_exec.so"
+        ],
+        "supplements": [
+          {
+            "url": "https://deb.debian.org/debian/pool/main/g/glibc/libc6_2.41-12+deb13u3_arm64.deb",
+            "sha256": "ff529924782d3286181188fc265a6a92e7fe28975fb3a925dc0e05c0ca66e52f",
+            "format": "deb",
+            "required": true,
+            "members": [
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libdl.so.2",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libdl_2_roon.so",
+                "soname": "libdl.so.2"
+              },
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libpthread.so.0",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libpthread_0_roon.so",
+                "soname": "libpthread.so.0"
+              },
+              {
+                "path": "usr/lib/aarch64-linux-gnu/librt.so.1",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/librt_1_roon.so",
+                "soname": "librt.so.1"
+              }
+            ]
+          },
+          {
+            "url": "https://deb.debian.org/debian/pool/main/o/openssl/libssl3t64_3.5.6-1~deb13u2_arm64.deb",
+            "sha256": "f7e09a12ccb2d6bd28bcc87a6e2462a0558dcb3cc34d56f90ee86fbd3402d8ba",
+            "format": "deb",
+            "required": true,
+            "members": [
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libssl.so.3",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libssl_3_roon.so",
+                "soname": "libssl.so.3"
+              },
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libcrypto.so.3",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libcrypto_3_roon.so",
+                "soname": "libcrypto.so.3"
+              }
+            ]
+          },
+          {
+            "url": "https://deb.debian.org/debian/pool/main/z/zlib/zlib1g_1.3.dfsg+really1.3.1-1+b1_arm64.deb",
+            "sha256": "209aa5cf671e97b9eb0410844fa6df4cae2e75b0c72e7802ab6c8ece13e6ddef",
+            "format": "deb",
+            "required": true,
+            "members": [
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libz.so.1.3.1",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libz_1_roon.so",
+                "soname": "libz.so.1"
+              }
+            ]
+          },
+          {
+            "url": "https://deb.debian.org/debian/pool/main/libz/libzstd/libzstd1_1.5.7+dfsg-1_arm64.deb",
+            "sha256": "924540bd59fdbfa77a0604360efdaca54411a43daf11c7e002a3c64791b67448",
+            "format": "deb",
+            "required": true,
+            "members": [
+              {
+                "path": "usr/lib/aarch64-linux-gnu/libzstd.so.1.5.7",
+                "role": "executable",
+                "apkEntry": "lib/arm64-v8a/libzstd_1_roon.so",
+                "soname": "libzstd.so.1"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
