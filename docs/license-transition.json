@@ -1,0 +1,47 @@
+[
+  {
+    "repository": "android-direct-dac",
+    "previous_head": "88b1dde60446898df03dddd4f17972c007261afc",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-usb-dac",
+    "previous_head": "6a5f10d04f4a9d002c75473ad577711be3babef1",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-dac-discovery",
+    "previous_head": "934cf5f713bd293b302a8d3d2f5c03b6ef7771f5",
+    "previous_project_declaration": "All rights reserved"
+  },
+  {
+    "repository": "android-alsa-host",
+    "previous_head": "905f793ed6d57c4c4860ca11a6fe11098bd0a657",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-naa",
+    "previous_head": "a5570cd621ae135f376b48172988f2f941b32877",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-alsa-endpoints",
+    "previous_head": "bc17a192c045a460c214ae375adecb248b19b20e",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-roon-bridge",
+    "previous_head": "68248422a25cfcb4b9351f29cb70c812e9878a03",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-endpoint-manager",
+    "previous_head": "5bfed50d7739266176c0b6abe2d3f671c8ad8bf8",
+    "previous_project_declaration": "MIT"
+  },
+  {
+    "repository": "android-roon-packager",
+    "previous_head": "de1e89c4ee31a67dcf1c65b172214fcff114cd5e",
+    "previous_project_declaration": "MIT"
+  }
+]

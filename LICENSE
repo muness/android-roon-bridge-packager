@@ -1,21 +1,20 @@
-MIT License
-
+Personal Noncommercial License 1.0
 Copyright (c) 2026 Muness Castle
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
+This license covers only original code, documentation and modifications whose copyright is owned by Muness Castle (the Licensor), offered under these terms. Third-party material and separately licensed components are addressed in section 5. No rights in Roon, Signalyst, device firmware, trademarks or other vendors' software are granted.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Personal permission
+An individual may use, copy, build and modify the covered material solely for that individual's private, noncommercial purposes, including personal listening, study, experimentation and hobby projects. An individual may share original or modified copies with other individuals without payment or other commercial benefit, solely for those recipients' personal, noncommercial purposes, provided these terms and all applicable copyright and third-party notices accompany every copy. Modified copies must be identified as modified. Recipients receive this permission directly from the Licensor. No sublicensing under broader terms is permitted.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. Commercial and organizational use
+No permission is granted for use on behalf of a business or other organization, commercial evaluation or product development, paid services, sale, commercial bundling, manufacturer preinstallation, firmware integration, or incorporation into a commercial application or product. A business employee's unrelated personal listening on their own device remains personal use. Any use outside section 2 requires a separate written license from the Licensor. Contact the repository owner for commercial terms.
+
+4. Conditions and termination
+Keep this license and all applicable notices with copies. Do not imply the Licensor's or a third party's endorsement. Breach terminates the permissions granted by this license; reinstatement requires the Licensor's written agreement. Rights granted by independent third-party licenses are not terminated by this provision.
+
+5. Third-party rights
+Third-party material retains its original license, including its commercial-use permissions. This license does not restrict any rights independently granted under MIT, BSD, Apache, GPL, LGPL or other licenses, including rights to modify or replace libraries where their licenses require them. A component's own license prevails for that component. See LICENSING.md and the retained third-party notices for scope and provenance.
+
+6. Reservation and disclaimer
+All rights not expressly granted are reserved, subject to rights that applicable law does not permit the Licensor to restrict. This is a source-available personal-use license, not an open-source license. THE COVERED MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, THE LICENSOR IS NOT LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE MATERIAL OR ITS USE.

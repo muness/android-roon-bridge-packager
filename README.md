@@ -15,7 +15,7 @@ Android's installable APK is the local installation mechanism: the user obtains 
 
 An independent Android tool that downloads the user's copy of Roon Bridge directly from Roon Labs, packs it into a separately obtained Android endpoint shell, verifies the copied bytes, signs locally, and asks Android to install it. Only Roon Bridge is offered.
 
-This is a fresh source-only repository derived from [android-endpoint-manager](https://github.com/muness/android-endpoint-manager) at `5bfed50d7739266176c0b6abe2d3f671c8ad8bf8`. It preserves the upstream MIT license and author attribution; no upstream Git history, vendor runtime, generated APK, or signing key was imported. The Android application ID is `io.github.muness.roonpackager`.
+This is a fresh source-only repository derived from [android-endpoint-manager](https://github.com/muness/android-endpoint-manager) at `5bfed50d7739266176c0b6abe2d3f671c8ad8bf8`. It preserves attribution and records the project-license correction in LICENSING.md; no upstream Git history, vendor runtime, generated APK, or signing key was imported. The Android application ID is `io.github.muness.roonpackager`.
 
 ## Licensing boundary
 
@@ -52,3 +52,7 @@ The release APK is unsigned. The debug APK is for development. Tests use synthet
 On Android, allow sideloading for this app and confirm each installation. The endpoint is installed separately as `io.github.muness.roonbridge`. The packager generates a signing key in its private data directory. **Uninstalling the packager or clearing its data loses that key**; an endpoint signed by the old key then needs uninstalling before an update, losing endpoint settings. A different signing key also prevents replacing an existing endpoint in place.
 
 Inherited diagnostics listen on TCP 48630 while the screen is open. They expose status/logs and cache clearing, plus endpoint verification-mark restoration; they cannot start packaging or installation. The HTTP diagnostics listener is separate from downloads, which require HTTPS. This is experimental software; no current physical-device test or endpoint compatibility claim is made.
+
+## Personal and commercial use
+
+Original work is available for individuals’ personal, noncommercial use under [LICENSE](LICENSE). Commercial integration, manufacturer preinstallation and organizational use require a separate written license from Muness Castle. Third-party licenses remain in effect; see [LICENSING.md](LICENSING.md).
