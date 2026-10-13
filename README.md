@@ -4,7 +4,14 @@
 
 > please do not distribute it. instead, provide an installer that downloads the latest build and installs it.
 
-This project follows that download-on-device model: the distributed packager contains no Roon software. The statement addresses installers generally; it does not specifically discuss Android APK packaging.
+This repository and its packaging flow follow that installer model:
+
+- **We distribute the installer.** The fresh Git history contains packager source, configuration and synthetic tests. The packager APK contains the installation tool and its dependencies, with no Roon Bridge binaries or archive. Builds and CI do not download Roon software.
+- **The user downloads Bridge directly from Roon.** After the user acknowledges the download notice, their Android device fetches the official ARMv8 archive from `download.roonlabs.com`. The project does not host, mirror or proxy that archive. A pinned SHA-256 check rejects an unexpected build.
+- **Packaging happens on that same device.** The installer copies the user's downloaded files into a separately fetched vendor-free Android shell. Executable files receive the APK entry names Android requires; data files retain their contents in an asset archive. The packager verifies that the copied Roon files are byte-identical to the archive members. It does not patch or relink Roon's binaries.
+- **The result is installed locally.** A signing key generated and kept on the user's device signs the resulting APK, and Android asks the user to confirm installation. The packager has no upload or APK sharing feature. Generated APKs containing Bridge are excluded from this repository and its releases.
+
+Android's installable APK is the local installation mechanism: the user obtains Roon's software from Roon, and the installer prepares it for use on that user's device. This follows the quoted guidance's distinction between distributing an installer and distributing Bridge. The statement does not specifically address Android APK packaging or constitute certification of this project.
 
 An independent Android tool that downloads the user's copy of Roon Bridge directly from Roon Labs, packs it into a separately obtained Android endpoint shell, verifies the copied bytes, signs locally, and asks Android to install it. Only Roon Bridge is offered.
 
