@@ -1,5 +1,11 @@
 # Android Roon Bridge Packager
 
+**Roon's published guidance: distribute an installer that downloads Bridge, rather than distributing Bridge itself.** In the [RoPieee discussion about Roon Bridge distribution](https://community.roonlabs.com/t/introducing-ropieee-a-roonbridge-to-go-image-for-the-raspberry-pi/24868?page=2), Danny Dulai wrote on May 2, 2017:
+
+> please do not distribute it. instead, provide an installer that downloads the latest build and installs it.
+
+This project follows that download-on-device model: the distributed packager contains no Roon software. The statement addresses installers generally; it does not specifically discuss Android APK packaging.
+
 An independent Android tool that downloads the user's copy of Roon Bridge directly from Roon Labs, packs it into a separately obtained Android endpoint shell, verifies the copied bytes, signs locally, and asks Android to install it. Only Roon Bridge is offered.
 
 This is a fresh source-only repository derived from [android-endpoint-manager](https://github.com/muness/android-endpoint-manager) at `5bfed50d7739266176c0b6abe2d3f671c8ad8bf8`. It preserves the upstream MIT license and author attribution; no upstream Git history, vendor runtime, generated APK, or signing key was imported. The Android application ID is `io.github.muness.roonpackager`.
