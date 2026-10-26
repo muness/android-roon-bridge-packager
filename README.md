@@ -14,9 +14,9 @@ Play music from Roon through your Android device's **built-in DAC or a USB DAC**
 
 1. Download the APK, open it on your Android device, and allow installation when Android asks.
 2. Open **Roon Bridge Packager** and tap **Download and install**. Read the download notice, then confirm installation.
-3. Tap **Open Roon Bridge — set up audio**. Choose the built-in DAC or connect a USB DAC and allow USB access when Android asks.
-4. Tap **Start playback service**. In Roon, open **Settings → Audio**, enable the output, select it, and play a track.
-5. Tell the app what you hear: **Sounds right**, **No sound**, or **Something's wrong**. Try other settings under **See all available settings**. Use **Restore working settings** to return to settings you've saved.
+3. Tap **Open Roon Bridge**. Choose the built-in DAC or connect a USB DAC and allow USB access when Android asks.
+4. Bridge starts automatically when you open the app. In Roon, open **Settings → Audio**, enable the output, select it, and play a track.
+5. On first setup, tap **Yes, sounds right** or **No, something’s wrong**. If something is wrong, choose what you hear, such as **No sound**. After that, use **Sound problem?** if you need help. Audio settings, reports and help are under **More**; the current audio format is under **More → Details**.
 
 ## USB DACs and built-in DACs
 
@@ -36,14 +36,15 @@ Bridge checks for new audio recipes at startup. A recipe is a set of audio setti
 
 ## Share playback results
 
-After trying a setting, open **Review and send playback results** in Roon Bridge, then tap **Send playback results**. Tell us what worked and what failed so we can improve the suggested settings for your device and similar models. Sending is optional and needs no account. The app retries when you're back online.
+After trying a setting, open **More → Review and send playback results** in Roon Bridge, then tap **Send playback results**. Tell us what worked and what failed so we can improve the suggested settings for your device and similar models. Sending is optional and needs no account. The app retries when you're back online.
 
 Reports contain your device model, software versions, audio settings, stream formats and listening answers. They exclude music metadata, account details, device names you've chosen, USB serial numbers, persistent device IDs, network addresses and raw logs. The hosting provider receives your IP address when you connect.
 
 ## Troubleshooting
 
-- **No sound:** check the output, volume and mute settings in Roon, on the player and on your amplifier. Then try another setting in the app.
-- **Noise or distortion:** stop playback and lower the volume. Record what you heard before trying another setting.
+- **No sound:** check the output, volume and mute settings in Roon, on the player and on your amplifier. Tap **Sound problem?** in the app to check your setup or try another setting.
+- **Roon shows Fixed volume:** select **DSP Volume** in Roon’s Device Setup if you want volume control in Roon. The player’s volume buttons control Android media volume while Bridge is open; the DAC decides whether that changes its output level.
+- **Noise or distortion:** stop playback and lower the volume. Record what you heard, then restore working settings or try another setting. A trial marked for noise stays stopped when you reopen the app.
 - **Download failed:** install the latest packager APK and try again. The installer rejects files whose checksums don't match.
 - **Installation blocked:** allow Roon Bridge Packager to install apps when Android opens its permission screen.
 
