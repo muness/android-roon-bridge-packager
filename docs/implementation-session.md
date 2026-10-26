@@ -82,12 +82,15 @@ source inspection do not establish audible playback, hardware format delivery or
 bit-exactness. Those remain explicit physical-device listening/capture checks.
 
 Production hosting is Cloudflare through the existing private HiPhi Cloud
-repository and protected deployment workflow, using a separate Worker and D1
+repository and authenticated deployment workflow, using a separate Worker and D1
 database. Administrative operations use Cloudflare's authenticated API rather
-than a public admin route. Private review/publication first proves REST batch
-success and rollback on dedicated scratch rows. Deployment and live transaction
-smoke checks remain pending and distinct from local synthetic tests; no public
-receiver is claimed available yet.
+than a public admin route. Private review/publication uses Wrangler's official remote D1 binding and first
+proves batch success and rollback on dedicated scratch rows. Live deployment at commit 44d2d7d passed in HiPhi Cloud run 40373339138,
+including the genuine remote D1 commit/rollback probe. The origin is
+https://hiphi-cloud-playback.open-horizons.workers.dev. Public health returned 200,
+the unpublished catalog returned 404, and the absent admin route returned 404.
+The existing application deployment was skipped; no synthetic reports were
+inserted into production.
 
 Verified local checks: 428 shared endpoint, 146 discovery, 43 bridge and 51 packager
 JVM tests pass, with zero failures, errors or skips in their current XML results.
@@ -104,6 +107,26 @@ were removed. Verification found all units absent, no port 8765 listener, and no
 unrelated files owned by that account. No other homelab service, tunnel, DNS record
 or firewall policy changed. Obsolete VM/container deployment files were removed.
 
-The repositories are private, so a private GitHub release cannot serve an
-anonymous shell download. The installer remains disabled until a complete
-audited vendor-free shell has a real public URL and independently recorded hash.
+The repositories remain private. A dedicated Cloudflare download Worker now
+serves only reviewed immutable objects from the private `hiphi-roon-distribution`
+R2 bucket. Source availability is checked before serving the shell. Anonymous
+full-body downloads verified both final objects; the parent independently
+redownloaded the shell and reran its 15-library/manifest audit before pinning it.
+
+Final shell: bridge `6c94f74`, shared endpoint `3c9f092`, clean detached build,
+version `0.2-poc (6c94f74)`, SHA-256
+`57dffc0b0875eda23708596c263fd2562736f568707550c717f07af21b3f6420`.
+Matching source archive SHA-256:
+`6fb19d6def87910daea14f4536c7827cdf84c6c4c03e3d64b9a95c46ee66dd19`.
+The APK embeds 25 license/notice assets. The native source bundle binds the exact
+APK and all 15 native entries; it excludes the private Android endpoint module.
+A local ARM64 QEMU probe verified native loading and 16,384 bytes through the
+synthetic ALSA card. This does not establish Android or physical DAC playback.
+
+The final recovery review also established that unreadable history suppresses
+sticky/null-intent automatic restart while explicit Start remains available.
+The complete 428-test shared suite passed again after that guard change.
+The installer catalogue is now enabled with the independently verified public
+shell URL/hash. Its own dependency licenses are embedded as text assets.
+No Roon runtime was downloaded during builds or tests, and no packed Roon APK
+was published. Physical-device listening and capture remain human verification.

@@ -4,7 +4,7 @@ This local reference implementation receives explicit playback submissions and
 publishes reviewed recipe catalogs using Python 3 and SQLite. Its synthetic tests
 and fixtures exercise the shared wire contract without vendor binaries. Production
 hosting uses the dedicated Cloudflare Worker and D1 database in
-[HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). Deployment is in progress; public availability has not yet been verified. Listeners need no
+[HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). The Cloudflare deployment and remote transaction probe passed in [run 40373339138](https://github.com/open-horizon-labs/hiphi-cloud/actions/runs/40373339138). Listeners need no
 account or browser. Playback and saved settings work without the service.
 
 `POST /v1/reports` accepts the exact v1 object in `fixtures/report.json`. All fields
@@ -137,7 +137,9 @@ Ordinary commands print receipts, identifiers or aggregate status; failures omit
 upstream response bodies, bound SQL values and credentials. Every administrative
 write first runs `verify-batch` against disposable probe rows, requiring both a
 successful two-statement batch and complete rollback of an invalid batch. Failed
-or unsupported REST transaction behavior blocks review, publication and purge.
+remote transaction behavior blocks review, publication and purge.
+The CLI uses Wrangler's official remote D1 binding with an isolated temporary
+configuration; it does not encode batch SQL through the REST query endpoint.
 No environment assertion can substitute for that live probe.
 
 The Cloudflare store bounds retained report/review/catalog payloads at 256 MiB and

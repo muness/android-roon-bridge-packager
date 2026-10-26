@@ -14,7 +14,7 @@ This project is not affiliated with, endorsed by, or approved by Roon Labs. See 
 - Permission on the device to install apps from a file ("install unknown apps") for the packager.
 - Two APKs from this project: the **packager** (this repository's releases) and the **endpoint shell** (`io.github.muness.roonbridge`, from [android-roon-bridge](https://github.com/muness/android-roon-bridge)). The packager fetches the shell for you once a shell release is pinned in its catalogue.
 
-> Until a shell release is published and pinned, the packager's catalogue points at a placeholder and the download step stops at hash verification. The [Configure the shell](#configure-the-shell) section explains the pin.
+> The catalogue pins the audited vendor-free shell and verifies its SHA-256 before packaging. Its native-component licenses and matching source archive are available in the [download manifest](https://hiphi-roon-downloads.open-horizons.workers.dev/manifest.json).
 
 ## Install
 
@@ -50,7 +50,7 @@ The report contains player/model and normalized firmware identifiers, app/engine
 
 Local history is bounded to the latest 256 attempts; working snapshots are retained separately. A submission contains that available history in bounded batches. Reports are deduplicated and reviewed by device/firmware/configuration before changing recommendations. A received receipt does not mean that a recipe has been qualified, and report counts are not unique-device counts.
 
-The receiving service and release configuration are documented in [feedback-service/README.md](feedback-service/README.md). Production hosting is being deployed through the dedicated Cloudflare service in [HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). Public availability is not yet verified; builds without a configured service retain queued results. The installer remains disabled until a complete audited shell has a public HTTPS URL and recorded hash.
+The receiving service and release configuration are documented in [feedback-service/README.md](feedback-service/README.md). Production hosting uses the dedicated Cloudflare service in [HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). The service is deployed and its remote transaction checks pass; builds without a configured service retain queued results. The installer downloads the audited shell from Cloudflare and verifies its recorded hash.
 
 ## Why this is an installer, not a Roon distribution
 
