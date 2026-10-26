@@ -21,13 +21,9 @@ Use **Send playback results** inside the endpoint to contribute structured resul
 
 ## What a recipe is
 
-A recipe is the handful of endpoint settings that make one device's output path work. The setup guide ranks recipes by device, Android/firmware, and engine compatibility, with bundled PCM recovery when no reviewed match exists. Native DSD on an unqualified model is blocked until a reviewed exact-cohort recipe is available. Choose and try recipes on the device through **See available settings**. The following HTTP interface is retained for developer diagnostics:
+A recipe is the handful of endpoint settings that make one device's output path work. The setup guide ranks recipes by device, Android/firmware, and engine compatibility, with bundled PCM recovery when no reviewed match exists. Native DSD on an unqualified model is blocked until a reviewed exact-cohort recipe is available. Choose and try recipes on the device through **See available settings**.
 
-```bash
-curl -X POST http://PLAYER_IP:48620/set -d 'dsd_port=offload' -d 'dsd_native_format=0x1a000001' -d 'dsd_packing=u8'
-```
-
-Setting any one of the three DSD keys makes all three an override; the ones you leave out are filled from the built-in profile. `GET /settings` shows every setting with its current value and what it accepts.
+Advanced settings are available in the app.
 
 ### DSD settings
 
@@ -54,10 +50,8 @@ Setting any one of the three DSD keys makes all three an override; the ones you 
 | `assume_high_speed` | `on`, `off` | Treat an undetermined USB bus speed as high speed. |
 | `feedback` | `on`, `off` | USB protocol feedback records. |
 
-### Finding a vendor DSD format number
+## Trying DSD
 
-Some players declare native DSD on a mix port in their audio policy (`/vendor/etc/audio/audio_policy_configuration.xml`); some accept a vendor-specific format number on a direct track; some do neither. If your player's policy file declares a `compressed_offload` port with a DSD format, `offload` with that format is the recipe. If it does not, a vendor number may exist; the iBasso DX260's is `13`. Scanning for one by trial can crash the audio server, so do it with the device in hand and expect a reboot.
-
-## Safety
-
-A DSD open on the wrong port or with the wrong format has crashed a player's audio server and needed a reboot. The endpoint deliberately does not probe DSD routes on its own, and `do=verify_probe` covers PCM rows only. Change one setting at a time, listen, and answer the prompt. If the app crashed at a format, it offers to skip that format on the next start.
+Use the app's applicable settings list. Lower the player and amplifier volume
+before a DSD trial, stop if you hear noise, and answer the listening prompt.
+Save working PCM settings first so you can restore them if another format fails.

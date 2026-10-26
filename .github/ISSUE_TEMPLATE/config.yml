@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: Known devices and recipes
-    url: https://github.com/muness/android-roon-packager/blob/main/docs/devices.md
+    url: https://github.com/muness/android-roon-bridge-packager/blob/main/docs/devices.md
     about: Check whether your device already has a recipe before filing a report.

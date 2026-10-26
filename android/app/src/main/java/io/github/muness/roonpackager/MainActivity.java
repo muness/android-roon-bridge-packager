@@ -40,6 +40,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
     private TextView jobLine;
     private TextView logView;
     private TextView cacheSummary;
+    private TextView versionDetails;
     private LinearLayout cacheList;
     private DiagnosticsServer diagnostics;
 
@@ -76,6 +77,8 @@ public final class MainActivity extends Activity implements JobState.Listener {
             details.setVisibility(show ? View.VISIBLE : View.GONE);
             technical.setText(show ? "Hide technical details" : "Technical details");
         });
+        versionDetails = body("");
+        details.addView(versionDetails);
         details.addView(body(keyNote()));
         details.addView(body("Local diagnostics are available while this screen is open on TCP "
                 + DiagnosticsServer.PORT + "."));
@@ -146,9 +149,13 @@ public final class MainActivity extends Activity implements JobState.Listener {
             list.addView(body("The catalogue is unreadable: " + error.getMessage()));
             return;
         }
+        StringBuilder versions = new StringBuilder();
         for (Catalogue.Endpoint endpoint : catalogue.endpoints) {
             list.addView(entryView(endpoint));
+            versions.append("Roon Bridge component: ").append(endpoint.vendorVersion)
+                    .append("\nAndroid app: ").append(endpoint.shell.versionName).append("\n");
         }
+        versionDetails.setText(versions.toString().trim());
         renderCache();
     }
 
@@ -240,13 +247,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
         card.addView(name);
 
         String installed = Catalogues.installedVersion(this, endpoint.shell.packageId);
-        StringBuilder lines = new StringBuilder();
-        lines.append(endpoint.vendor).append(' ').append(endpoint.vendorVersion)
-                .append("  (vendor version)\n");
-        lines.append(endpoint.shell.versionName).append("  (app shell)\n");
-        lines.append(installed == null ? "not installed" : installed)
-                .append("  (installed)");
-        card.addView(body(lines.toString()));
+        card.addView(body(installed == null ? "Ready to install" : "Installed version: " + installed));
 
         if (installed != null) {
             card.addView(body("Installed. Continue in Roon Bridge to set up audio and send playback results."));
