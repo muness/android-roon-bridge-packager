@@ -426,7 +426,18 @@ public final class ApkPacker {
         }
 
         int align = plan.nativeAlignment > 0 ? plan.nativeAlignment : 4;
-        List<String> keptOwn = new ArrayList<>();
+        // Fail before creating an output APK: a Java-only preview shell cannot
+        // launch the endpoint even when every downloaded vendor byte is valid.
+        if (plan.isTree()) {
+            try (ZipFile shell = new ZipFile(shellApk)) {
+                for (String own : plan.ownLibraries) {
+                    ZipEntry entry = shell.getEntry(plan.nativeDir + own);
+                    if (entry == null || entry.isDirectory()) {
+                        throw new IOException("the shell does not carry required library " + own);
+                    }
+                }
+            }
+        }
 
         try (ZipFile shell = new ZipFile(shellApk);
                 ZipWriter writer = new ZipWriter(outputApk)) {
@@ -458,9 +469,6 @@ public final class ApkPacker {
                     writer.deflated(name, content, false);
                     record(report, name, "DEFLATED", content);
                 }
-                if (name.startsWith(plan.nativeDir)) {
-                    keptOwn.add(name.substring(plan.nativeDir.length()));
-                }
             }
 
             for (Map.Entry<String, File> native_ : nativeEntries.entrySet()) {
@@ -481,13 +489,6 @@ public final class ApkPacker {
             }
         }
 
-        if (plan.isTree()) {
-            for (String own : plan.ownLibraries) {
-                if (!keptOwn.contains(own)) {
-                    report.notes.add("the shell does not carry " + own);
-                }
-            }
-        }
     }
 
     /** The content of one entry in an APK, or null when it is not there. */

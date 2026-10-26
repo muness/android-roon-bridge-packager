@@ -2,7 +2,7 @@
 
 What has been tried, on which device, with what result. "Through Roon Bridge" means via this project's endpoint shell. "Via NAA" means the same output libraries driven by the sibling HQPlayer NAA endpoint app or the device-lab app; it is good evidence the output path works, but not proof that Roon Bridge drives it the same way. Nothing here has been proven bit-exact by capturing the digital output.
 
-Results come from [device reports](../../../issues?q=label%3Adevice-report). Add yours.
+Use **Send playback results** inside the endpoint to contribute structured results. The table below records the initial evidence; current app catalogs can add reviewed, scoped recipes.
 
 ## Internal DAC
 
@@ -21,7 +21,7 @@ Results come from [device reports](../../../issues?q=label%3Adevice-report). Add
 
 ## What a recipe is
 
-A recipe is the handful of endpoint settings that make one device's output path work. The endpoint applies the built-in recipe when `Build.MANUFACTURER` and `Build.MODEL` match exactly; otherwise it falls back to Qualcomm's reference DSD configuration (`offload` · `0x1a000001` · `u8`) and the normal direct PCM path. You can apply a recipe yourself over HTTP after enabling **Allow remote writes** on the device:
+A recipe is the handful of endpoint settings that make one device's output path work. The setup guide ranks recipes by device, Android/firmware, and engine compatibility, with bundled PCM recovery when no reviewed match exists. Native DSD on an unqualified model is blocked until a reviewed exact-cohort recipe is available. Choose and try recipes on the device through **See available settings**. The following HTTP interface is retained for developer diagnostics:
 
 ```bash
 curl -X POST http://PLAYER_IP:48620/set -d 'dsd_port=offload' -d 'dsd_native_format=0x1a000001' -d 'dsd_packing=u8'
@@ -36,7 +36,7 @@ Setting any one of the three DSD keys makes all three an override; the ones you 
 | `dsd_port` | `auto`, `offload`, `passthrough`, `vendor` | Which output the DSD stream opens on. `offload` is the Qualcomm `compressed_offload` mix port; `vendor` is a direct track with a vendor-numbered format and no mix port; `passthrough` is `dsd_compress_passthrough` and is never chosen automatically. |
 | `dsd_native_format` | `auto` or a 32-bit number | The `audio_format_t` for the offload and vendor routes. `0x1a000001` is Qualcomm's `AUDIO_FORMAT_DSD_NATIVE`; iBasso uses `13`. |
 | `dsd_format` | 32-bit number, default `0x1a000000` | The format for the passthrough port. |
-| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. Wrong layout sounds like noise; the endpoint steps to the next candidate after you answer Noise. |
+| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. Wrong layout sounds like noise; record Noise in the guide, then explicitly choose the next applicable layout. The answer does not switch a live stream. |
 
 ### PCM and path settings
 

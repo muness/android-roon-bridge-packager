@@ -1,0 +1,44 @@
+{
+  "reviewer": "maintainer",
+  "reason": "Reviewed scoped PCM listening evidence.",
+  "recipe": {
+    "id": "example-player-pcm",
+    "revision": 1,
+    "label": "Example Player PCM",
+    "status": "recommended",
+    "manufacturer": "Example",
+    "model": "Player One",
+    "minSdk": 30,
+    "maxSdk": 30,
+    "firmware": "release-1",
+    "endpoint": "roon",
+    "output": "internal",
+    "requiredFeatures": [
+      "pcm-direct-v1"
+    ],
+    "settings": {
+      "sink": "direct",
+      "prefer_internal": "on",
+      "force_encoding": "16",
+      "force_rate": "48000",
+      "direct_route": "system",
+      "direct_buffer": "stream",
+      "direct_guard": "on",
+      "dsd_port": "auto",
+      "dsd_native_format": "auto",
+      "dsd_packing": "auto",
+      "dop_ceiling": "verified",
+      "verified_only": "on",
+      "feedback": "on"
+    },
+    "reason": "Reviewed Roon listening report for this model and firmware; other formats remain untested.",
+    "engineVersion": "endpoint-audio-v1"
+  },
+  "evidence": [
+    {
+      "receiptId": "REPLACE-WITH-RECEIPT",
+      "attemptId": "58a50c28-a707-42de-a360-925fbe38d126"
+    }
+  ],
+  "acknowledgeConflicts": false
+}

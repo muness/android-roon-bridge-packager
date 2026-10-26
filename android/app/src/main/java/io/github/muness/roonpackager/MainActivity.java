@@ -51,19 +51,11 @@ public final class MainActivity extends Activity implements JobState.Listener {
         int pad = dp(16);
         root.setPadding(pad, pad, pad, pad);
 
-        root.addView(heading("Roon Bridge Packager"));
-        root.addView(body("This app installs an audio endpoint on this device without a"
-                + " computer. It downloads the vendor's own Linux build from the vendor's own"
-                + " URL, puts it into an app shell that ships without it, signs the result with"
-                + " a key made on this device, and hands that to Android's package installer."
-                + " The packager contains no Roon runtime. See the terms before downloading.\n\n"
-                + "A proof of concept. Sideloading has to be allowed for this app, and the"
-                + " installer asks you to confirm every install."));
-        root.addView(body(keyNote()));
-        root.addView(body("Diagnostics: GET /health, /status, /logs, and POST /action"
-                + " do=clear_cache, on TCP " + DiagnosticsServer.PORT
-                + " while this screen is open."));
-
+        root.addView(body("Install Roon Bridge on this player, then open it to choose your audio"
+                + " output and check that music sounds right. You need a Roon server on the same"
+                + " network and a wired output.\n\n"
+                + "This installer downloads your copy of Roon Bridge after you acknowledge the"
+                + " terms. Android will ask you to confirm installation."));
         jobLine = body("idle");
         jobLine.setTypeface(Typeface.MONOSPACE);
         root.addView(jobLine);
@@ -72,25 +64,41 @@ public final class MainActivity extends Activity implements JobState.Listener {
         list.setOrientation(LinearLayout.VERTICAL);
         root.addView(list);
 
-        root.addView(heading("Cached downloads"));
-        root.addView(body("Vendor archives and app shells this device already fetched and"
+        Button technical = new Button(this);
+        technical.setText("Technical details");
+        root.addView(technical);
+        LinearLayout details = new LinearLayout(this);
+        details.setOrientation(LinearLayout.VERTICAL);
+        details.setVisibility(View.GONE);
+        root.addView(details);
+        technical.setOnClickListener(view -> {
+            boolean show = details.getVisibility() != View.VISIBLE;
+            details.setVisibility(show ? View.VISIBLE : View.GONE);
+            technical.setText(show ? "Hide technical details" : "Technical details");
+        });
+        details.addView(body(keyNote()));
+        details.addView(body("Local diagnostics are available while this screen is open on TCP "
+                + DiagnosticsServer.PORT + "."));
+
+        details.addView(heading("Cached downloads"));
+        details.addView(body("Vendor archives and app shells this device already fetched and"
                 + " verified, kept by their sha256 so a repeat pack does not fetch them again."));
         cacheSummary = body("");
-        root.addView(cacheSummary);
+        details.addView(cacheSummary);
         Button clearCache = new Button(this);
         clearCache.setText("Clear cache");
         clearCache.setOnClickListener(view -> onClearCache());
-        root.addView(clearCache);
+        details.addView(clearCache);
         cacheList = new LinearLayout(this);
         cacheList.setOrientation(LinearLayout.VERTICAL);
-        root.addView(cacheList);
+        details.addView(cacheList);
 
         logView = new TextView(this);
         logView.setTypeface(Typeface.MONOSPACE);
         logView.setTextSize(10);
         logView.setTextIsSelectable(true);
         logView.setMovementMethod(new ScrollingMovementMethod());
-        root.addView(logView);
+        details.addView(logView);
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(root);
@@ -240,8 +248,20 @@ public final class MainActivity extends Activity implements JobState.Listener {
                 .append("  (installed)");
         card.addView(body(lines.toString()));
 
+        if (installed != null) {
+            card.addView(body("Installed. Continue in Roon Bridge to set up audio and send playback results."));
+            Button open = new Button(this);
+            open.setText("Open Roon Bridge — set up audio");
+            open.setMinHeight(dp(48));
+            open.setOnClickListener(view -> {
+                android.content.Intent launch = getPackageManager().getLaunchIntentForPackage(endpoint.shell.packageId);
+                if (launch != null) startActivity(launch);
+                else android.widget.Toast.makeText(this, "Roon Bridge cannot be opened. Try reinstalling it.", android.widget.Toast.LENGTH_LONG).show();
+            });
+            card.addView(open);
+        }
         Button action = new Button(this);
-        action.setText(installed == null ? "Download and install" : "Update");
+        action.setText(installed == null ? "Download and install" : "Update installation");
         action.setEnabled(!JobState.running() && !endpoint.shell.url.contains("example.invalid"));
         if (endpoint.shell.url.contains("example.invalid")) {
             card.addView(body("A reviewed vendor-free shell URL and hash must be configured before packing."));
