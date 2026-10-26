@@ -294,8 +294,8 @@ public final class MainActivity extends Activity implements JobState.Listener {
         return "The signing key: " + (present ? "made, and kept" : "not made yet")
                 + ". This app makes one signing key the first time it packs anything and keeps"
                 + " it in its own data directory, because Android installs an update over an"
-                + " app only while both are signed by the same key. Reinstalling this app"
-                + " deletes that data and therefore the key -- after which an endpoint it"
+                + " app only while both are signed by the same key. Uninstalling this app or clearing its data"
+                + " deletes the key -- after which an endpoint it"
                 + " installed can no longer be updated in place, and you have to uninstall the"
                 + " endpoint before installing a newly signed one.";
     }

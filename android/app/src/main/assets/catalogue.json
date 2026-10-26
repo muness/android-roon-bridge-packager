@@ -20,10 +20,10 @@
         "text": "This app does not contain Roon Bridge. Your device downloads it directly from Roon Labs and packs your copy locally into a separately downloaded app shell. The packager does not upload the archive or generated APK. Each copied file is checked for byte identity before installation.\n\nRoon's software terms apply to the download and its use. Those terms restrict copying, incorporation into other programs and providing copies to others. Downloading directly and preserving bytes do not establish permission to repackage. Proceed only if you have the necessary rights. Do not distribute the generated APK.\n\nThis independent tool is not affiliated with, endorsed by, or approved by Roon Labs."
       },
       "shell": {
-        "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/57dffc0b0875eda23708596c263fd2562736f568707550c717f07af21b3f6420/roon-shell.apk",
-        "sha256": "57dffc0b0875eda23708596c263fd2562736f568707550c717f07af21b3f6420",
+        "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/1f7742caed7518b87769c8af5f775c11d5bd86e28b5699f1d77e088083179db0/roon-shell.apk",
+        "sha256": "1f7742caed7518b87769c8af5f775c11d5bd86e28b5699f1d77e088083179db0",
         "packageId": "io.github.muness.roonbridge",
-        "versionName": "0.2-poc (6c94f74)"
+        "versionName": "1.0.0"
       },
       "packPlan": {
         "kind": "tree",
