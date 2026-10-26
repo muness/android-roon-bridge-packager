@@ -23,7 +23,7 @@ In Roon Bridge, open **Review and send playback results**, then tap **Send playb
 
 A recipe is a set of audio settings for a device or DAC. The app suggests recipes based on your model, Android version, firmware and playback engine. Choose one under **See all available settings**, play a track and record what you hear.
 
-If no reviewed recipe matches, start with the built-in PCM settings. Native DSD requires a reviewed recipe that matches your device and software. You can also adjust settings in the app.
+If no reviewed recipe matches, start with the built-in PCM settings. For the built-in DAC, native DSD requires a reviewed recipe that matches your device and software. USB DSD support depends on the formats the DAC exposes and the USB connection bandwidth. You can also adjust settings in the app.
 
 ### DSD settings
 
@@ -32,7 +32,7 @@ If no reviewed recipe matches, start with the built-in PCM settings. Native DSD 
 | `dsd_port` | `auto`, `offload`, `passthrough`, `vendor` | Which output the DSD stream opens on. `offload` is the Qualcomm `compressed_offload` mix port; `vendor` is a direct track with a vendor-numbered format and no mix port; `passthrough` is `dsd_compress_passthrough` and is never chosen automatically. |
 | `dsd_native_format` | `auto` or a 32-bit number | The `audio_format_t` for the offload and vendor routes. `0x1a000001` is Qualcomm's `AUDIO_FORMAT_DSD_NATIVE`; iBasso uses `13`. |
 | `dsd_format` | 32-bit number, default `0x1a000000` | The format for the passthrough port. |
-| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. Wrong layout sounds like noise; record Noise in the guide, then explicitly choose the next applicable layout. The answer does not switch a live stream. |
+| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. If you hear noise, choose **Something’s wrong**, then **Noise / distortion — stop playback**. Choose another layout after stopping playback. |
 
 ### PCM and path settings
 
