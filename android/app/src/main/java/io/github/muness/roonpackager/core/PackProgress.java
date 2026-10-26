@@ -8,13 +8,13 @@ package io.github.muness.roonpackager.core;
 public interface PackProgress {
 
     enum Step {
-        DOWNLOADING_SHELL("downloading the app shell"),
-        DOWNLOADING_VENDOR("downloading the vendor archive"),
+        DOWNLOADING_SHELL("downloading the Android app"),
+        DOWNLOADING_VENDOR("downloading Roon Bridge"),
         VERIFYING_DOWNLOAD("verifying the download"),
-        EXTRACTING("extracting"),
-        PACKING("packing"),
+        EXTRACTING("unpacking files"),
+        PACKING("building your APK"),
         SIGNING("signing"),
-        VERIFYING_RESULT("verifying the result"),
+        VERIFYING_RESULT("checking the finished APK"),
         INSTALLING("installing");
 
         public final String label;

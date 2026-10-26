@@ -1,29 +1,29 @@
 # Known devices and recipes
 
-What has been tried, on which device, with what result. "Through Roon Bridge" means via this project's endpoint shell. "Via NAA" means the same output libraries driven by the sibling HQPlayer NAA endpoint app or the device-lab app; it is good evidence the output path works, but not proof that Roon Bridge drives it the same way. Nothing here has been proven bit-exact by capturing the digital output.
+These tables list playback tests for built-in and USB DACs. The Evidence column identifies the app used: Roon Bridge or HQPlayer NAA. NAA results describe the shared audio code; they are not Roon playback tests. Bit-perfect output has not been checked with a digital capture.
 
-Use **Send playback results** inside the endpoint to contribute structured results. The table below records the initial evidence; current app catalogs can add reviewed, scoped recipes.
+In Roon Bridge, open **Review and send playback results**, then tap **Send playback results**. The app downloads new recipes after review.
 
 ## Internal DAC
 
 | Device | Android / SDK | PCM (direct) | DoP | Native DSD | Recipe | Evidence |
 |---|---|---|---|---|---|---|
-| Cayin N7 | 12 / 31 | Working, rates preserved (44.1 and 192 seen), zero overruns | untested | DSD64–DSD512 heard clean | `offload` · `0x1a000001` · `u8` (built in) | PCM through Roon Bridge; DSD via NAA |
-| iBasso DX260 | 11 / 30 | untested through Roon Bridge | untested | DSD64–DSD256 heard clean; DSD512 silent; DSD1024 crashes the HAL | `vendor` · `13` · `u32be` (built in) | via NAA |
-| Shanling M6 Pro | 7.1 / 25 | Packed 24-bit clean at 192 kHz; 32-bit gives static; S24_LE stutters at 192 kHz | untested | no qualified recipe | `force_encoding=24` | via NAA |
-| FiiO M11S | — | planned, PCM only | — | — | none | not yet tried |
+| Cayin N7 | 12 / 31 | Working, rates preserved (44.1 and 192 seen), zero overruns | untested | DSD64–DSD512 played cleanly | `offload` · `0x1a000001` · `u8` (built in) | PCM through Roon Bridge; DSD via NAA |
+| iBasso DX260 | 11 / 30 | untested through Roon Bridge | untested | DSD64–DSD256 played cleanly; DSD512 silent; DSD1024 crashes the HAL | `vendor` · `13` · `u32be` (built in) | via NAA |
+| Shanling M6 Pro | 7.1 / 25 | Packed 24-bit clean at 192 kHz; 32-bit gives static; S24_LE stutters at 192 kHz | untested | no tested recipe | `force_encoding=24` | via NAA |
+| FiiO M11S | — | not tested | — | — | none | not yet tried |
 
 ## USB DAC
 
 | DAC | Host | PCM | DoP | Native DSD | Notes | Evidence |
 |---|---|---|---|---|---|---|
-| Cayin RU9 | any arm64 host, high-speed USB | yes | DoP64–256 | up to DSD512 on `alt=3 RAW_DATA` | DSD1024 exceeds endpoint bandwidth | via NAA |
+| Cayin RU9 | ARM64 Android, high-speed USB | yes | DoP64–256 | up to DSD512 on `alt=3 RAW_DATA` | DSD1024 exceeds endpoint bandwidth | via NAA |
 
 ## What a recipe is
 
-A recipe is the handful of endpoint settings that make one device's output path work. The setup guide ranks recipes by device, Android/firmware, and engine compatibility, with bundled PCM recovery when no reviewed match exists. Native DSD on an unqualified model is blocked until a reviewed exact-cohort recipe is available. Choose and try recipes on the device through **See available settings**.
+A recipe is a set of audio settings for a device or DAC. The app suggests recipes based on your model, Android version, firmware and playback engine. Choose one under **See all available settings**, play a track and record what you hear.
 
-Advanced settings are available in the app.
+If no reviewed recipe matches, start with the built-in PCM settings. Native DSD requires a reviewed recipe that matches your device and software. You can also adjust settings in the app.
 
 ### DSD settings
 
@@ -52,6 +52,6 @@ Advanced settings are available in the app.
 
 ## Trying DSD
 
-Use the app's applicable settings list. Lower the player and amplifier volume
+Choose a DSD setting from the app's available settings. Lower the player and amplifier volume
 before a DSD trial, stop if you hear noise, and answer the listening prompt.
 Save working PCM settings first so you can restore them if another format fails.

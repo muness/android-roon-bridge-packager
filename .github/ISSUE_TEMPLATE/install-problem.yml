@@ -1,12 +1,12 @@
-name: Install or packaging problem
-description: The packager failed before Roon Bridge was installed, or the endpoint would not start.
+name: Installation problem
+description: Report a download, installation or startup error.
 title: "[install] <step that failed> on <device>"
 labels: ["install-problem"]
 body:
   - type: markdown
     attributes:
       value: |
-        For results from a working endpoint, use the Device report form instead. Do not attach the Roon archive, a packed APK, or anything from Roon's files.
+        For playback results, tap **Send playback results** in Roon Bridge. Do not attach the Roon archive, a packed APK, or anything from Roon's files.
   - type: dropdown
     id: step
     attributes:
@@ -14,13 +14,13 @@ body:
       options:
         - Installing the packager APK
         - Downloading Roon Bridge from Roon
-        - Downloading the endpoint shell
-        - Downloading the Debian supplements
+        - Downloading the Android app
+        - Downloading supporting libraries
         - Packing or verification
         - Signing
         - Android install prompt
-        - Endpoint shell starts but says the runtime is missing
-        - Endpoint shell crashes on start
+        - Roon Bridge opens but says files are missing
+        - Roon Bridge crashes on startup
     validations:
       required: true
   - type: input
@@ -33,14 +33,14 @@ body:
   - type: input
     id: versions
     attributes:
-      label: Packager version and shell version it was fetching
+      label: Packager version and Android app version (under Technical details)
     validations:
       required: true
   - type: textarea
     id: error
     attributes:
       label: Error text shown
-      description: Exactly as displayed. A hash mismatch message is expected if Roon has released a new build; say so if that is what you saw.
+      description: Copy the message shown on screen.
       render: text
     validations:
       required: true
@@ -48,7 +48,7 @@ body:
     id: logs
     attributes:
       label: Packager log
-      description: "The log on the packager screen, or `curl http://PLAYER_IP:48630/logs` while the packager is open."
+      description: "Optional: copy the log under Technical details. Remove personal information before posting."
       render: text
   - type: textarea
     id: notes

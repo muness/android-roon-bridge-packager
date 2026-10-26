@@ -2,4 +2,7 @@ blank_issues_enabled: true
 contact_links:
   - name: Known devices and recipes
     url: https://github.com/muness/android-roon-bridge-packager/blob/main/docs/devices.md
-    about: Check whether your device already has a recipe before filing a report.
+    about: See tested devices, formats and audio settings.
+  - name: Send playback results from the app
+    url: https://github.com/muness/android-roon-bridge-packager#share-playback-results
+    about: In Roon Bridge, open Review and send playback results, then tap Send playback results.

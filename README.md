@@ -1,54 +1,58 @@
 # Roon Bridge for Android
 
-Turn an Android music player or phone into a Roon output, using its built-in DAC or a connected USB DAC. This app installs Roon Bridge on your device and helps you choose working audio settings.
+Play music from Roon through your Android device's **built-in DAC or a USB DAC**. This app installs Roon Bridge and walks you through audio setup.
 
 **[Download the APK](https://github.com/muness/android-roon-bridge-packager/releases/latest/download/roon-bridge-packager.apk)** · [All releases](https://github.com/muness/android-roon-bridge-packager/releases)
 
 ## What you need
 
-- An ARM64 Android device running Android 8 or newer.
+- An ARM64 Android phone, tablet or music player running Android 8 or newer.
 - A Roon server on the same network and a Roon subscription.
-- Wired headphones, a line output, or a compatible USB DAC.
-
-Audio format support depends on your player and DAC. See [known devices](docs/devices.md).
+- Headphones or speakers connected to the device's headphone/line output or to a USB DAC.
 
 ## Install and play
 
-1. Download the APK above, open it on your Android device, and allow installation when Android asks.
-2. Open **Roon Bridge Packager** and tap **Download and install**. Accept the download notice and confirm installation of Roon Bridge.
-3. Tap **Open Roon Bridge — set up audio**. Choose your player's output or USB DAC and try the suggested settings.
-4. Start Bridge. In Roon, open **Settings → Audio**, enable the new output, select it, and play a track.
-5. Answer **Sounds right**, **No sound**, or **Something's wrong** in the app. If needed, try another option under **See available settings**. **Restore working settings** returns to settings that worked on this output.
+1. Download the APK, open it on your Android device, and allow installation when Android asks.
+2. Open **Roon Bridge Packager** and tap **Download and install**. Read the download notice, then confirm installation.
+3. Tap **Open Roon Bridge — set up audio**. Choose the built-in DAC or connect a USB DAC and allow USB access when Android asks.
+4. Tap **Start playback service**. In Roon, open **Settings → Audio**, enable the output, select it, and play a track.
+5. Tell the app what you hear: **Sounds right**, **No sound**, or **Something's wrong**. Try other settings under **See all available settings**. Use **Restore working settings** to return to settings you've saved.
 
-The installer downloads everything it needs. You do not need to install a separate shell, enter a server address, or use a browser to configure audio.
+## USB DACs and built-in DACs
+
+Connect a USB DAC to your Android device, choose **Use a USB DAC**, and select it in the app. Connect your headphones or amplifier to the DAC.
+
+For the built-in DAC, connect headphones or an amplifier to the player's headphone or line output. The app suggests settings for your device and lets you try alternatives.
+
+PCM, DoP and native DSD support varies by DAC and Android device. The [device table](docs/devices.md) lists tested formats and results.
 
 ## Updates
 
-Install a newer packager APK over the existing app, then tap **Update installation** to update Roon Bridge.
+Install the new APK over the existing packager, then tap **Update installation**.
 
-Keep the packager installed and do not clear its data: it holds the signing key used for your locally installed Roon Bridge. Losing that key can require reinstalling Bridge and setting it up again.
+Keep the packager installed and keep its app data. It stores the signing key Android needs to update your copy of Roon Bridge. If you delete the key, you'll need to reinstall Bridge and set it up again.
 
-Audio recipes update when Bridge starts. Saved working settings stay in place, and playback can use saved or bundled recipes while offline.
+Bridge checks for new audio recipes at startup. A recipe is a set of audio settings for a device or DAC. Updates preserve your saved working settings. Saved and built-in recipes also work offline.
 
 ## Share playback results
 
-After trying a setting, tap **Send playback results** inside Roon Bridge. Both successful and unsuccessful attempts help improve settings for similar players and DACs. Submission is optional, needs no account, and retries if you are offline.
+After trying a setting, open **Review and send playback results** in Roon Bridge, then tap **Send playback results**. Tell us what worked and what failed so we can improve the suggested settings for your device and similar models. Sending is optional and needs no account. The app retries when you're back online.
 
-Reports include the device model, software versions, audio settings, stream formats and your listening answers. They do not include music metadata, account details, endpoint names, USB serial numbers, persistent device identifiers, network addresses or raw logs. Network infrastructure still handles normal connection information.
+Reports contain your device model, software versions, audio settings, stream formats and listening answers. They exclude music metadata, account details, device names you've chosen, USB serial numbers, persistent device IDs, network addresses and raw logs. The hosting provider receives your IP address when you connect.
 
 ## Troubleshooting
 
-- **No sound:** check the selected output, player/amplifier volume and mute, then try another suggested setting in the app.
-- **Noise or distortion:** stop playback, lower the volume, and report what you heard before trying another setting.
-- **Download failed:** use the newest packager APK and try again. Downloads are checked against known hashes; unexpected files are rejected.
+- **No sound:** check the output, volume and mute settings in Roon, on the player and on your amplifier. Then try another setting in the app.
+- **Noise or distortion:** stop playback and lower the volume. Record what you heard before trying another setting.
+- **Download failed:** install the latest packager APK and try again. The installer rejects files whose checksums don't match.
 - **Installation blocked:** allow Roon Bridge Packager to install apps when Android opens its permission screen.
 
-For installation problems, [open an issue](https://github.com/muness/android-roon-bridge-packager/issues/new/choose). Submit playback results in the app.
+[Report installation problems](https://github.com/muness/android-roon-bridge-packager/issues/new/choose). Send playback results from the app.
 
-## About the download
+## Downloads and licenses
 
-The installer contains no Roon software. Your device downloads Roon Bridge directly from Roon Labs after you accept the notice, then packages and installs your copy locally. Do not distribute the resulting Roon-containing APK. This project is not affiliated with or endorsed by Roon Labs; their software terms apply. See [licensing details](docs/LICENSE-BOUNDARY.md).
+The installer downloads Roon Bridge directly from Roon Labs after you accept the notice. It builds and installs your copy on your device. Do not share the resulting Roon-containing APK. Roon's terms apply; this project is independent of Roon Labs. See [Roon software and distribution](docs/LICENSE-BOUNDARY.md).
 
-Original project work is available for personal, noncommercial use under [LICENSE](LICENSE). Third-party licenses remain in effect; see [NOTICE.md](NOTICE.md). Native-component notices and corresponding sources are provided with the [downloaded components](https://hiphi-roon-downloads.open-horizons.workers.dev/manifest.json).
+Original project code is licensed for personal, noncommercial use under [LICENSE](LICENSE). Third-party components keep their own licenses; see [NOTICE.md](NOTICE.md). [Component downloads](https://hiphi-roon-downloads.open-horizons.workers.dev/manifest.json) include license notices and corresponding source code.
 
 [Build instructions](docs/development.md) · [Report format reference](feedback-service/README.md)

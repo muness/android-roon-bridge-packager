@@ -17,7 +17,7 @@
       "licence": {
         "title": "You are downloading Roon Labs' software",
         "vendorUrl": "https://roon.app/en/termsandconditions",
-        "text": "This app does not contain Roon Bridge. Your device downloads it directly from Roon Labs and packs your copy locally into a separately downloaded app shell. The packager does not upload the archive or generated APK. Each copied file is checked for byte identity before installation.\n\nRoon's software terms apply to the download and its use. Those terms restrict copying, incorporation into other programs and providing copies to others. Downloading directly and preserving bytes do not establish permission to repackage. Proceed only if you have the necessary rights. Do not distribute the generated APK.\n\nThis independent tool is not affiliated with, endorsed by, or approved by Roon Labs."
+        "text": "This installer does not contain Roon Bridge. Your device downloads Roon Bridge directly from Roon Labs and builds an Android app for your use. The installer checks each copied Roon file against the original. It does not upload the download or finished APK.\n\nRoon's terms restrict copying, incorporating its software into other programs and sharing copies. Downloading directly does not grant permission to repackage it. Continue only if you have the necessary rights. Do not share the finished APK.\n\nThis project is independent of Roon Labs and has not been approved or endorsed by them."
       },
       "shell": {
         "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/1f7742caed7518b87769c8af5f775c11d5bd86e28b5699f1d77e088083179db0/roon-shell.apk",
