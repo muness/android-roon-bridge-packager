@@ -44,7 +44,7 @@ Reports contain your device model, software versions, audio settings, stream for
 
 - **No sound:** check the output, volume and mute settings in Roon, on the player and on your amplifier. Tap **Sound problem?** in the app to check your setup or try another setting.
 - **Roon shows Fixed volume:** select **DSP Volume** in Roon’s Device Setup if you want volume control in Roon. The player’s volume buttons control Android media volume while Bridge is open; the DAC decides whether that changes its output level.
-- **Noise or distortion:** stop playback and lower the volume. Record what you heard before trying another setting.
+- **Noise or distortion:** stop playback and lower the volume. Record what you heard, then restore working settings or try another setting. A trial marked for noise stays stopped when you reopen the app.
 - **Download failed:** install the latest packager APK and try again. The installer rejects files whose checksums don't match.
 - **Installation blocked:** allow Roon Bridge Packager to install apps when Android opens its permission screen.
 

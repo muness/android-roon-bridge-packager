@@ -20,8 +20,8 @@
         "text": "This installer does not contain Roon Bridge. Your device downloads Roon Bridge directly from Roon Labs and builds an Android app for your use. The installer checks each copied Roon file against the original. It does not upload the download or finished APK.\n\nRoon's terms restrict copying, incorporating its software into other programs and sharing copies. Downloading directly does not grant permission to repackage it. Continue only if you have the necessary rights. Do not share the finished APK.\n\nThis project is independent of Roon Labs and has not been approved or endorsed by them."
       },
       "shell": {
-        "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/de62618e7d801f2a5ff94f344910c037f36a42d57e055c8d27b01d0366344f33/roon-shell.apk",
-        "sha256": "de62618e7d801f2a5ff94f344910c037f36a42d57e055c8d27b01d0366344f33",
+        "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/d69f419248eb15cdc7530031c11311e7da87008ee535b6dca3ec64adfc921fb1/roon-shell.apk",
+        "sha256": "d69f419248eb15cdc7530031c11311e7da87008ee535b6dca3ec64adfc921fb1",
         "packageId": "io.github.muness.roonbridge",
         "versionName": "1.0.2"
       },
