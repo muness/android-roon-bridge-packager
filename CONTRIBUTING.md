@@ -11,7 +11,7 @@ A recipe is a set of endpoint settings that makes an output path work on a devic
 - the `/verified` table showing the rows granted and heard working;
 - which jack or DAC, and whether you compared against another known-good source.
 
-A recipe is listed as known after two independent reports agree or the maintainer has reproduced it on hardware. One report gets it listed as a candidate. A report that contradicts a known recipe is not noise; it usually means a firmware or Android difference, and the fingerprint tells us which.
+A recipe is listed as known after two independent reports agree or the maintainer has reproduced it on hardware. One report gets it listed as a candidate. By filing a device report you agree the facts in it (device, settings, results, diagnostics you chose to include) may be republished in this project's device list and recipes. A report that contradicts a known recipe is not noise; it usually means a firmware or Android difference, and the fingerprint tells us which.
 
 ## Code and docs
 

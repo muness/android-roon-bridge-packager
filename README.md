@@ -113,7 +113,7 @@ The release APK is unsigned and must be signed before it is distributed. The deb
 
 On Android, allow sideloading for this app and confirm each installation. The packager generates a signing key in its private data directory. **Uninstalling the packager or clearing its data loses that key**; an endpoint signed by the old key then needs uninstalling before an update, losing endpoint settings. A different signing key also prevents replacing an existing endpoint in place.
 
-The packager's own diagnostics listen on TCP 48630 while the screen is open. They expose status, logs and cache clearing, plus endpoint verification-mark restoration; they cannot start packaging or installation. The HTTP diagnostics listener is separate from downloads, which require HTTPS.
+The packager's own diagnostics listen on TCP 48630 while the screen is open. They expose status, logs and cache clearing, plus endpoint verification-mark restoration; they cannot start packaging or installation. Mark restoration needs a shell that serves `/verified/export` and `/verified/import`; the current shell does not yet, so that action reports a failure until it does. The HTTP diagnostics listener is separate from downloads, which require HTTPS.
 
 ## Personal and commercial use
 
