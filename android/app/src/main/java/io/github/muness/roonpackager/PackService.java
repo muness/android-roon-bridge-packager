@@ -148,7 +148,7 @@ public final class PackService extends Service {
                     "Packing", NotificationManager.IMPORTANCE_LOW));
         }
         return new Notification.Builder(this, CHANNEL)
-                .setContentTitle("Endpoint manager")
+                .setContentTitle("Roon Bridge Packager")
                 .setContentText(text)
                 .setSmallIcon(android.R.drawable.stat_sys_download)
                 .setOngoing(true)

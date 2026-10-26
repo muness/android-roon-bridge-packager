@@ -1,0 +1,145 @@
+name: Device report
+description: What happened when you ran Roon Bridge on your Android device. Successes count as much as failures.
+title: "[device] <manufacturer model> — <internal | USB DAC name> — <one-line result>"
+labels: ["device-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. A report from a device nobody has tried is the most useful thing this project can get. Fill in what you can; a partial report beats none. Redact a USB serial number if `/verified` shows one. Do not paste anything from Roon's own files.
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Overall result
+      options:
+        - Everything I tried works
+        - PCM works, DSD does not
+        - Works only after I set a recipe by hand
+        - Zone appears in Roon but no sound
+        - Endpoint starts but Roon never shows the zone
+        - Endpoint does not start
+        - Something that used to work stopped after an update
+    validations:
+      required: true
+  - type: dropdown
+    id: brand
+    attributes:
+      label: Device brand
+      options:
+        - Cayin
+        - iBasso
+        - Shanling
+        - FiiO
+        - HiBy
+        - Sony
+        - Astell&Kern
+        - Other DAP
+        - Android phone or tablet
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Device model
+      description: As Android reports it. The `Android:` line of `/report` has manufacturer, model, release, SDK and build.
+      placeholder: N7
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: Android version and build
+      placeholder: "12 (SDK 31) / N7-V1.3.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: path
+    attributes:
+      label: Output path
+      options:
+        - Internal DAC, headphone jack
+        - Internal DAC, line out
+        - USB DAC
+    validations:
+      required: true
+  - type: input
+    id: usb
+    attributes:
+      label: USB DAC (if used)
+      description: Model and, if you have it, vendor:product id from `/verified` (looks like `usb/1a2b/3c4d/...`). Leave the serial out.
+      placeholder: "Cayin RU9, usb/..."
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Packager, endpoint shell, and Roon Bridge. `/report` has the shell and Roon versions in its first lines.
+      placeholder: "packager 0.1, shell 0.1-poc (abc1234), Roon Bridge 2.71 (build 1683)"
+    validations:
+      required: true
+  - type: dropdown
+    id: recipe
+    attributes:
+      label: Recipe
+      description: Did the endpoint apply a built-in recipe, run on the default, or did you set one by hand?
+      options:
+        - Built-in recipe applied automatically (my device is in the known list)
+        - Default configuration, no overrides
+        - I set a recipe by hand (listed below)
+    validations:
+      required: true
+  - type: textarea
+    id: overrides
+    attributes:
+      label: Settings you changed
+      description: The `--- overrides ---` section of `/report`, or the `POST /set` values you used.
+      render: text
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you tried, and what you heard
+      description: One line per format. Working / Stutters / Noise / Silence / Not working / Crashed.
+      value: |
+        PCM 44.1/16:
+        PCM 96/24:
+        PCM 192/24:
+        PCM 192/32:
+        DoP64:
+        DoP128:
+        DSD64:
+        DSD128:
+        DSD256:
+        DSD512:
+    validations:
+      required: true
+  - type: textarea
+    id: verified
+    attributes:
+      label: Output of GET /verified
+      description: "`curl http://PLAYER_IP:48620/verified` after tapping Allow on the device. This is the granted/heard table."
+      render: text
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of GET /status
+      description: Includes the current DSD route and any crash offer.
+      render: text
+  - type: textarea
+    id: report
+    attributes:
+      label: Output of GET /report
+      description: Device, versions, sink and the log tail. Up to 200 KB; trim the log if it is enormous.
+      render: text
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Reboots needed, which jack, a vendor format number you found, a digital capture if you made one, what you compared against.
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I removed any USB serial number and pasted nothing from Roon's own files.
+          required: true
+        - label: I understand results are self-reported and this project makes no claim of Roon approval.
+          required: true

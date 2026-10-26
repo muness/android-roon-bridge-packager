@@ -169,7 +169,7 @@ public final class DiagnosticsServer {
                     write(open, 200, ManagerLog.text());
                     break;
                 case "/":
-                    write(open, 200, "endpoint manager " + version()
+                    write(open, 200, "roon packager " + version()
                             + "\nGET /health, /status, /logs\nPOST /action do=clear_cache\n");
                     break;
                 default:
@@ -222,7 +222,7 @@ public final class DiagnosticsServer {
 
     private String status() {
         StringBuilder text = new StringBuilder();
-        text.append("endpoint manager ").append(version()).append('\n');
+        text.append("roon packager ").append(version()).append('\n');
         text.append("job: ").append(JobState.line()).append('\n');
         String failure = JobState.failure();
         if (failure != null) {

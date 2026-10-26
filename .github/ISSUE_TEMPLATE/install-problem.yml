@@ -1,0 +1,56 @@
+name: Install or packaging problem
+description: The packager failed before Roon Bridge was installed, or the endpoint would not start.
+title: "[install] <step that failed> on <device>"
+labels: ["install-problem"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For results from a working endpoint, use the Device report form instead. Do not attach the Roon archive, a packed APK, or anything from Roon's files.
+  - type: dropdown
+    id: step
+    attributes:
+      label: Where it stopped
+      options:
+        - Installing the packager APK
+        - Downloading Roon Bridge from Roon
+        - Downloading the endpoint shell
+        - Downloading the Debian supplements
+        - Packing or verification
+        - Signing
+        - Android install prompt
+        - Endpoint shell starts but says the runtime is missing
+        - Endpoint shell crashes on start
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: "iBasso DX260, Android 11 (SDK 30)"
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Packager version and shell version it was fetching
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error text shown
+      description: Exactly as displayed. A hash mismatch message is expected if Roon has released a new build; say so if that is what you saw.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Packager log
+      description: "The log on the packager screen, or `curl http://PLAYER_IP:48630/logs` while the packager is open."
+      render: text
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
