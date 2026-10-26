@@ -46,7 +46,7 @@ public final class ApkSigning {
                 // A shell built as a debug APK is debuggable, and signing one
                 // is the normal case here rather than a mistake.
                 .setDebuggableApkPermitted(true)
-                .setCreatedBy("android-endpoint-manager")
+                .setCreatedBy("android-roon-packager")
                 .build();
         try {
             apkSigner.sign();

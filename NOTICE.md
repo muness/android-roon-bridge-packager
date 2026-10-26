@@ -1,6 +1,6 @@
 # Notices
 
-This repository derives from android-endpoint-manager by Muness Castle, at commit `5bfed50d7739266176c0b6abe2d3f671c8ad8bf8`, with original-work licensing corrected as recorded in LICENSING.md. The current terms for Muness-owned original work are in LICENSE and LICENSING.md. The fresh Git history does not erase this attribution.
+Original work in this repository is by Muness Castle and licensed as described in LICENSE and LICENSING.md.
 
 Gradle resolves Apache Commons Compress (Apache 2.0), XZ for Java 1.10 (0BSD), Android apksig (Apache 2.0), and Gson (Apache 2.0). JUnit 4 is test-only (EPL 1.0). These are not vendored here. Their applicable notices and licenses remain relevant to a binary distribution.
 

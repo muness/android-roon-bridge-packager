@@ -6,7 +6,7 @@
 
 This repository and its packaging flow follow that installer model:
 
-- **We distribute the installer.** The fresh Git history contains packager source, configuration and synthetic tests. The packager APK contains the installation tool and its dependencies, with no Roon Bridge binaries or archive. Builds and CI do not download Roon software.
+- **We distribute the installer.** This repository contains packager source, configuration and synthetic tests. The packager APK contains the installation tool and its dependencies, with no Roon Bridge binaries or archive. Builds and CI do not download Roon software.
 - **The user downloads Bridge directly from Roon.** After the user acknowledges the download notice, their Android device fetches the official ARMv8 archive from `download.roonlabs.com`. The project does not host, mirror or proxy that archive. A pinned SHA-256 check rejects an unexpected build.
 - **Packaging happens on that same device.** The installer copies the user's downloaded files into a separately fetched vendor-free Android shell. Executable files receive the APK entry names Android requires; data files retain their contents in an asset archive. The packager verifies that the copied Roon files are byte-identical to the archive members. It does not patch or relink Roon's binaries.
 - **The result is installed locally.** A signing key generated and kept on the user's device signs the resulting APK, and Android asks the user to confirm installation. The packager has no upload or APK sharing feature. Generated APKs containing Bridge are excluded from this repository and its releases.
@@ -15,7 +15,7 @@ Android's installable APK is the local installation mechanism: the user obtains 
 
 An independent Android tool that downloads the user's copy of Roon Bridge directly from Roon Labs, packs it into a separately obtained Android endpoint shell, verifies the copied bytes, signs locally, and asks Android to install it. Only Roon Bridge is offered.
 
-This is a fresh source-only repository derived from [android-endpoint-manager](https://github.com/muness/android-endpoint-manager) at `5bfed50d7739266176c0b6abe2d3f671c8ad8bf8`. It preserves attribution and records the project-license correction in LICENSING.md; no upstream Git history, vendor runtime, generated APK, or signing key was imported. The Android application ID is `io.github.muness.roonpackager`.
+The Android application ID is `io.github.muness.roonpackager`.
 
 ## Licensing boundary
 
