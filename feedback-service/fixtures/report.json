@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "reportId": "53fc33e1-fd5d-46bc-ab58-918b15dcb533",
+  "consent": "playback-results",
+  "attempts": [
+    {
+      "id": "58a50c28-a707-42de-a360-925fbe38d126",
+      "order": 0,
+      "manufacturer": "Example",
+      "model": "Player One",
+      "sdk": 30,
+      "firmware": "release-1",
+      "endpoint": "roon",
+      "endpointVersion": "1.0",
+      "engineVersion": "endpoint-audio-v1",
+      "output": "internal",
+      "catalogSequence": 0,
+      "recipeId": "conservative-pcm",
+      "recipeRevision": 1,
+      "settings": {
+        "sink": "direct",
+        "prefer_internal": "on",
+        "force_encoding": "16",
+        "force_rate": "48000",
+        "direct_route": "system",
+        "direct_buffer": "stream",
+        "direct_guard": "on",
+        "dsd_port": "auto",
+        "dsd_native_format": "auto",
+        "dsd_packing": "auto",
+        "dop_ceiling": "verified",
+        "verified_only": "on",
+        "feedback": "on",
+        "test_mode": "off",
+        "assume_high_speed": "off"
+      },
+      "requested": {
+        "encoding": "pcm",
+        "rate": 48000,
+        "channels": 2,
+        "sampleFormat": "S16_LE"
+      },
+      "actual": {
+        "encoding": "pcm",
+        "rate": 48000,
+        "channels": 2,
+        "sampleFormat": "S16_LE"
+      },
+      "grant": "opened",
+      "hearing": "working",
+      "fault": "none",
+      "elapsedMs": 10000
+    }
+  ]
+}

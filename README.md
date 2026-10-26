@@ -1,8 +1,8 @@
 # Roon Bridge on Android
 
-Run a Roon endpoint on an Android digital audio player or phone, bit-exact to a USB DAC or the device's own DAC, including DSD. You download Roon Bridge from Roon Labs on the device itself; this installer packs your copy into a small vendor-free app and installs it locally. Nothing of Roon's is distributed by this project.
+Run a Roon endpoint on an Android digital audio player or phone using a USB DAC or the device's own DAC, with direct PCM and device-dependent DSD support. You download Roon Bridge from Roon Labs on the device itself; this installer packs your copy into a small vendor-free app and installs it locally. Nothing of Roon's is distributed by this project.
 
-**Status: experimental.** One device has been verified end to end through this app so far (Cayin N7, Android 12, PCM to the internal DAC). DSD, DoP and USB DACs have evidence from the same output libraries in a sibling project but have not yet been confirmed through Roon Bridge here. Android players differ wildly in how they let audio out bit-exactly, especially DSD, so the point of releasing this is to learn what works on *your* device. If you try it, please [report what happened](#report-what-happened), whether it worked or not.
+**Status: experimental.** One device has been verified end to end through this app so far (Cayin N7, Android 12, PCM to the internal DAC). DSD, DoP and USB DACs have evidence from the same output libraries in a sibling project but have not yet been confirmed through Roon Bridge here. Android players differ wildly in how they let audio out bit-exactly, especially DSD, so the point of releasing this is to learn what works on *your* device. If you try it, please [send playback results](#send-playback-results), whether it worked or not.
 
 This project is not affiliated with, endorsed by, or approved by Roon Labs. See [Licensing boundary](#licensing-boundary).
 
@@ -20,41 +20,37 @@ This project is not affiliated with, endorsed by, or approved by Roon Labs. See 
 
 1. Install the packager APK and open it. It lists one endpoint: Roon Bridge.
 2. Tap **Download and install**. Read the notice. It says, accurately, that your device is about to download Roon's software from Roon under Roon's terms, and that this app does not contain it.
-3. The packager downloads the official ARMv8 Roon Bridge archive from `download.roonlabs.com`, the shell APK, and four Debian runtime libraries. Every download is checked against a pinned SHA-256; a mismatch stops the run. Nothing is uploaded anywhere.
+3. The packager downloads the official ARMv8 Roon Bridge archive from `download.roonlabs.com`, the shell APK, and four Debian runtime libraries. Every download is checked against a pinned SHA-256; a mismatch stops the run. Installation does not upload your runtime or generated APK. Playback results are sent separately only when you choose to submit them in the endpoint app.
 4. It copies Roon's files into the shell on the device, checks each copied file is byte-identical to the archive, signs the result with a key generated on your device, and asks Android to install it. Confirm the install.
 5. Open **Roon Bridge** on the device, tap Start, then enable the new zone in Roon. The zone is named after your device unless you change `endpoint_name`.
 
 If Roon releases a new production build of Bridge, step 3 will fail with a hash mismatch until this project re-qualifies the new build and ships an updated catalogue. That is deliberate: the packager never trusts an unexpected download. The current pin is Roon Bridge 2.71 (build 1683), checked against the official download on 2026-10-25.
 
-## Try it, and see what worked
+## Get audio working
 
-The endpoint keeps a table per output (per internal DAC, or per USB DAC by vendor/product) of which formats it has actually been **granted** by Android (a real open succeeded) and which you have **heard** working. The first time a stream starts at a format nobody has answered for, the screen asks three seconds in whether it sounds right: Working / Stutters / Not working for PCM, Working / Noise / Silence for DSD. Answer honestly; "noise" on DSD makes the endpoint try the next byte layout.
+After installation, tap **Open Roon Bridge — set up audio**. In Roon Bridge, choose the player's wired output or your USB DAC. The guide offers a matching recipe or a general PCM starting point. Start Bridge, enable its named zone in Roon, and play a track.
 
-Everything is also readable over HTTP on the device's LAN address, port 48620, after you tap **Allow** for your computer on the device:
+Answer what you hear: **Sounds right**, **No sound**, or **Something's wrong**. A successful Android open alone does not complete setup. If a setting fails, the app saves the result and offers another applicable PCM setting. **See available settings** shows the full candidate list, prior results, and reasons a setting cannot be tried. DSD trials require an explicit choice; the app never sweeps vendor format numbers. **Restore working settings** returns to a saved configuration for the output and firmware.
 
-```bash
-curl http://PLAYER_IP:48620/verified
-```
+Working PCM does not establish that other rates, DoP, or native DSD work. The stream shown on screen is what arrived from Roon; its format is recorded with the answer. Nothing here has been proven bit-exact by a digital capture.
 
-`/report` has the device, versions, sink and log; `/status` has the current DSD route and any crash offer; `/settings` lists every setting with its current value and what it accepts.
+### Recipes and updates
 
-### Known devices and recipes
+Each endpoint includes fallback recipes and checks its release-configured service for updates when its service starts. Updates change available suggestions without changing an active trial or saved working settings. Offline startup uses a valid local catalog or the bundled recipes.
 
-If your device is on the [known devices list](docs/devices.md), the endpoint applies that recipe automatically (today that is an exact match on manufacturer and model for the Cayin N7 and iBasso DX260). Otherwise it uses Qualcomm's reference DSD configuration and the usual direct PCM path, which is the most common arrangement and the first thing worth trying.
+Matching distinguishes exact player/Android/firmware evidence from broader vendor suggestions. Reports from NAA retain that provenance. Reviewed native DSD recipes carry explicit device and engine scope plus a maximum multiple; the opener enforces that bound and existing known-device limits. A compatible catalog can add a reviewed device recipe without repackaging the endpoint. New native mechanisms still require an app update.
 
-If a known recipe for a *similar* device exists, or the default does not work, you can set a recipe by hand with `POST /set` once you have enabled **Allow remote writes** on the device:
+[Known-device evidence](docs/devices.md) describes the initial observations. A match is a recommendation, not a local listening confirmation.
 
-```bash
-curl -X POST http://PLAYER_IP:48620/set -d 'dsd_port=vendor' -d 'dsd_native_format=13' -d 'dsd_packing=u32be'
-```
+## Send playback results
 
-[docs/devices.md](docs/devices.md) lists the settings each known recipe maps to and what each setting controls. Do not sweep DSD routes blindly: a DSD open on the wrong port has taken down a player's audio server and needed a reboot. Try one change at a time and listen.
+Tap **Send playback results** inside Roon Bridge after a listening attempt. The app assembles and submits structured results, including failed attempts before a success. There is no browser form, account, log copying, or file attachment. Pending submissions persist locally and retry when connectivity returns; their status distinguishes queued results from a received report. Sending results never blocks listening.
 
-## Report what happened
+The report contains player/model and normalized firmware identifiers, app/engine/recipe versions, output type and USB vendor/product numbers where applicable, audio settings, source-stream formats, technical outcomes, and your listening answers. The observed DSD route is included when known. It excludes track metadata, user-entered endpoint names, account information, serials, persistent device identifiers, network addresses, and raw logs. The receiving network infrastructure necessarily handles connection metadata; the deployment disables request/access-body logging.
 
-Please open a [device report](../../issues/new?template=device-report.yml) whether it worked or failed. The form asks for your device, output path, what you tried and the result, and the output of `/report`, `/verified` and `/status`. Redact the USB serial number if you see one. A report from a device nobody has tried is the single most useful thing you can give this project; a report that something *stopped* working after an Android or Roon update is the second.
+Local history is bounded to the latest 256 attempts; working snapshots are retained separately. A submission contains that available history in bounded batches. Reports are deduplicated and reviewed by device/firmware/configuration before changing recommendations. A received receipt does not mean that a recipe has been qualified, and report counts are not unique-device counts.
 
-What counts as "working" here is: Android granted the format on a direct path with no mixer, the rate you sent is the rate the DAC received, and it sounds right to you. Nobody has yet captured the digital output to prove bit-exactness; if you can, say so in the report.
+The receiving service and release configuration are documented in [feedback-service/README.md](feedback-service/README.md). Production hosting is being deployed through the dedicated Cloudflare service in [HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). Public availability is not yet verified; builds without a configured service retain queued results. The installer remains disabled until a complete audited shell has a public HTTPS URL and recorded hash.
 
 ## Why this is an installer, not a Roon distribution
 

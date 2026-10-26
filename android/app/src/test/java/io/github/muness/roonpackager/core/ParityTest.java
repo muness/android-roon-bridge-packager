@@ -202,6 +202,33 @@ public final class ParityTest {
     }
 
     @Test
+    public void aTreeShellMissingARequiredOwnLibraryCannotProduceAnApk() throws Exception {
+        Catalogue.Endpoint endpoint = Catalogue.read(open("parity/tree-fixture.json"))
+                .byId("fake-tree");
+        List<String> own = new ArrayList<>(endpoint.packPlan.ownLibraries);
+        String missing = own.remove(own.size() - 1);
+        File shell = FixtureArchives.treeShellApk(folder.newFile("incomplete-shell.apk"),
+                own.toArray(new String[0]), null);
+        File archive = FixtureArchives.tarBz2(folder.newFile("synthetic-runtime.tar.bz2"),
+                "RoonBridge", new String[]{"VERSION", "Bridge/RoonBridge.dll",
+                        "Bridge/libhostfxr.so"}, new byte[][]{
+                        "fixture\n".getBytes(StandardCharsets.UTF_8),
+                        "managed fixture\n".getBytes(StandardCharsets.UTF_8),
+                        FixtureArchives.fakeElf("libhostfxr.so")});
+        ArchiveReader.Tree tree = ArchiveReader.extract(archive, "tar.bz2",
+                folder.newFolder("incomplete-shell-tree"));
+        File packed = new File(folder.getRoot(), "must-not-exist.apk");
+        try {
+            new ApkPacker(endpoint, PackProgress.NONE).pack(shell, tree,
+                    new ArrayList<ArchiveReader.Tree>(), packed);
+            fail("a shell missing a required own library must be rejected");
+        } catch (IOException expected) {
+            assertTrue(expected.getMessage(), expected.getMessage().contains(missing));
+            assertTrue("an unusable APK must not be created", !packed.exists());
+        }
+    }
+
+    @Test
     public void aVerifierRejectsAnEntryWithTwoDots() throws Exception {
         // Not a hypothetical: a two-dot name is silently not extracted by
         // Android, which is a failure with no error message, and it is what
