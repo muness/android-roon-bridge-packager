@@ -1,7 +1,7 @@
-# Distribution and permission boundary
+# Roon software and distribution
 
-Roon's [software terms](https://roon.app/en/termsandconditions) were consulted on 2026-10-13. Section 2.1 addresses copying, incorporating software into other programs, and making software available to others. Direct download and byte identity do not resolve those restrictions. Permission for this repackaging flow has not been established. Written permission from Roon or qualified legal review would be needed to support a broader compliance claim. No certification or endorsement is implied.
+Roon's [software terms](https://roon.app/en/termsandconditions), section 2.1, restrict copying, incorporating its software into other programs and sharing copies. Downloading directly from Roon Labs and preserving the files does not grant permission to repackage them. This project has not obtained that permission and is not approved or endorsed by Roon Labs.
 
-The release boundary is the packager APK only. It contains this project's source and Gradle-resolved dependencies, but no Roon runtime or endpoint shell. Vendor archives, packed APKs and private signing keys stay on the device, outside the repository and its releases. Build and CI do not download Roon. Synthetic tests exercise archive handling, packing and signatures. Source/history and APK checks enforce mechanical boundaries; they are not legal approval or proof against deliberately disguised vendor material.
+The published installer APK contains no Roon software. It downloads Roon Bridge on your device, builds your APK and installs it. Keep that APK and its signing key on your device; do not distribute them. Builds and CI use synthetic test files rather than Roon downloads.
 
-A separately supplied endpoint shell includes native runtime and audio dependencies. Their licenses and corresponding-source obligations need their own review before hosting a shell. This repository does not remove those obligations. See NOTICE.md for packager dependencies.
+The Android app and supporting libraries have their own licenses. Distributors must preserve their notices and provide corresponding source where those licenses require it. See [NOTICE.md](../NOTICE.md).

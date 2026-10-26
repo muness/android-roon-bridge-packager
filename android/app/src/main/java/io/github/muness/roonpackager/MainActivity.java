@@ -52,11 +52,10 @@ public final class MainActivity extends Activity implements JobState.Listener {
         int pad = dp(16);
         root.setPadding(pad, pad, pad, pad);
 
-        root.addView(body("Install Roon Bridge on this player, then open it to choose your audio"
-                + " output and check that music sounds right. You need a Roon server on the same"
-                + " network and a wired output.\n\n"
-                + "This installer downloads your copy of Roon Bridge after you acknowledge the"
-                + " terms. Android will ask you to confirm installation."));
+        root.addView(body("Play music from Roon through this device's built-in DAC or a USB DAC."
+                + " You need a Roon server on the same network.\n\n"
+                + "Tap Download and install, read the download notice, then confirm installation."
+                + " Open Roon Bridge to choose your output and start listening."));
         jobLine = body("idle");
         jobLine.setTypeface(Typeface.MONOSPACE);
         root.addView(jobLine);
@@ -84,8 +83,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
                 + DiagnosticsServer.PORT + "."));
 
         details.addView(heading("Cached downloads"));
-        details.addView(body("Vendor archives and app shells this device already fetched and"
-                + " verified, kept by their sha256 so a repeat pack does not fetch them again."));
+        details.addView(body("Verified downloads are saved here for the next installation."));
         cacheSummary = body("");
         details.addView(cacheSummary);
         Button clearCache = new Button(this);
@@ -205,9 +203,8 @@ public final class MainActivity extends Activity implements JobState.Listener {
     private void onClearCache() {
         new AlertDialog.Builder(this)
                 .setTitle("Clear cache")
-                .setMessage("Delete every cached download, including any partial download in"
-                        + " progress. Nothing already installed is affected; the next pack"
-                        + " re-downloads whatever it needs.")
+                .setMessage("Delete saved and unfinished downloads? Your installed apps stay in place."
+                        + " The next installation will download the files again.")
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("Clear", (dialog, which) -> {
                     long[] freed = Downloads.cache(this).clearAll();
@@ -250,7 +247,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
         card.addView(body(installed == null ? "Ready to install" : "Installed version: " + installed));
 
         if (installed != null) {
-            card.addView(body("Installed. Continue in Roon Bridge to set up audio and send playback results."));
+            card.addView(body("Open Roon Bridge to choose your built-in DAC or USB DAC."));
             Button open = new Button(this);
             open.setText("Open Roon Bridge — set up audio");
             open.setMinHeight(dp(48));
@@ -265,7 +262,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
         action.setText(installed == null ? "Download and install" : "Update installation");
         action.setEnabled(!JobState.running() && !endpoint.shell.url.contains("example.invalid"));
         if (endpoint.shell.url.contains("example.invalid")) {
-            card.addView(body("A reviewed vendor-free shell URL and hash must be configured before packing."));
+            card.addView(body("This installer has no app download configured. Get the latest release."));
         }
         action.setOnClickListener(view -> onAction(endpoint));
         card.addView(action);
@@ -291,13 +288,10 @@ public final class MainActivity extends Activity implements JobState.Listener {
 
     private String keyNote() {
         boolean present = new java.io.File(getFilesDir(), "packing-key.p12").isFile();
-        return "The signing key: " + (present ? "made, and kept" : "not made yet")
-                + ". This app makes one signing key the first time it packs anything and keeps"
-                + " it in its own data directory, because Android installs an update over an"
-                + " app only while both are signed by the same key. Uninstalling this app or clearing its data"
-                + " deletes the key -- after which an endpoint it"
-                + " installed can no longer be updated in place, and you have to uninstall the"
-                + " endpoint before installing a newly signed one.";
+        return "Installation signing key: " + (present ? "saved" : "created on first install")
+                + ". Android needs this key to update your copy of Roon Bridge."
+                + " Keep this app installed and keep its app data. If you delete the key,"
+                + " you must uninstall Roon Bridge before installing it again.";
     }
 
     private static String tail(String text, int lines) {
