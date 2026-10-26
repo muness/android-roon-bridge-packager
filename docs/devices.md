@@ -32,7 +32,7 @@ If no reviewed recipe matches, start with the built-in PCM settings. For the bui
 | `dsd_port` | `auto`, `offload`, `passthrough`, `vendor` | Which output the DSD stream opens on. `offload` is the Qualcomm `compressed_offload` mix port; `vendor` is a direct track with a vendor-numbered format and no mix port; `passthrough` is `dsd_compress_passthrough` and is never chosen automatically. |
 | `dsd_native_format` | `auto` or a 32-bit number | The `audio_format_t` for the offload and vendor routes. `0x1a000001` is Qualcomm's `AUDIO_FORMAT_DSD_NATIVE`; iBasso uses `13`. |
 | `dsd_format` | 32-bit number, default `0x1a000000` | The format for the passthrough port. |
-| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. If you hear noise, choose **Something’s wrong**, then **Noise / distortion — stop playback**. Choose another layout after stopping playback. |
+| `dsd_packing` | `auto`, `u8`, `u32be`, `u32le`, `u8_lsb`, `u32be_lsb` | DSD byte layout. If you hear noise, choose **No, something’s wrong**, then **Noise / distortion — stop playback**. Choose another layout after stopping playback. |
 
 Roon Bridge follows the PCM format sent by Roon. It ignores old rate and bit-depth overrides and excludes recipes that require them. The Shanling result above records an NAA test; its forced-bit-depth setting is not offered in Roon Bridge.
 

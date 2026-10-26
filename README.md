@@ -16,7 +16,7 @@ Play music from Roon through your Android device's **built-in DAC or a USB DAC**
 2. Open **Roon Bridge Packager** and tap **Download and install**. Read the download notice, then confirm installation.
 3. Tap **Open Roon Bridge**. Choose the built-in DAC or connect a USB DAC and allow USB access when Android asks.
 4. Bridge starts automatically when you open the app. In Roon, open **Settings → Audio**, enable the output, select it, and play a track.
-5. On first setup, tell the app what you hear: **Sounds right**, **No sound**, or **Something's wrong**. After that, use **Sound problem?** if you need help. Audio settings, reports and help are under **More**; the current audio format is under **More → Details**.
+5. On first setup, tap **Yes, sounds right** or **No, something’s wrong**. If something is wrong, choose what you hear, such as **No sound**. After that, use **Sound problem?** if you need help. Audio settings, reports and help are under **More**; the current audio format is under **More → Details**.
 
 ## USB DACs and built-in DACs
 
