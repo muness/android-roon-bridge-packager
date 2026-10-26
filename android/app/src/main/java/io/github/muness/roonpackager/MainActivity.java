@@ -249,7 +249,7 @@ public final class MainActivity extends Activity implements JobState.Listener {
         if (installed != null) {
             card.addView(body("Open Roon Bridge to choose your built-in DAC or USB DAC."));
             Button open = new Button(this);
-            open.setText("Open Roon Bridge — set up audio");
+            open.setText("Open Roon Bridge");
             open.setMinHeight(dp(48));
             open.setOnClickListener(view -> {
                 android.content.Intent launch = getPackageManager().getLaunchIntentForPackage(endpoint.shell.packageId);
