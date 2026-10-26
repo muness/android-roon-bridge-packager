@@ -4,13 +4,8 @@ plugins {
 
 // ---------------------------------------------------------------- versioning
 //
-// The same rule the other apps in this family use: a version passed by the
-// publish script, or `git describe`, and either way the short commit on the
-// end, so the one question that matters on a device with no adb -- "is the
-// build I am looking at the build I just made?" -- has an answer on screen.
-//
-//   -PappVersion=0.1-poc   what the publish script passes
-//   otherwise              git describe --tags --always --dirty
+// Published builds use the supplied release version. Local builds identify their commit.
+//   -PappVersion=1.0.0
 
 static def gitOutput(File dir, List<String> command, String fallback) {
     try {
@@ -36,7 +31,7 @@ def versionBase = project.hasProperty("appVersion")
 if (versionBase.isEmpty()) {
     versionBase = commitHash
 }
-def managerVersionName = versionBase.contains(commitHash)
+def managerVersionName = project.hasProperty("appVersion") || versionBase.contains(commitHash)
         ? versionBase
         : versionBase + " (" + commitHash + ")"
 def commitCount = gitOutput(repoRoot, ["git", "rev-list", "--count", "HEAD"], "")

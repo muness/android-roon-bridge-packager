@@ -73,7 +73,7 @@ body:
     attributes:
       label: Versions
       description: Packager, endpoint shell, and Roon Bridge. `/report` has the shell and Roon versions in its first lines.
-      placeholder: "packager 0.1, shell 0.1-poc (abc1234), Roon Bridge 2.71 (build 1683)"
+      placeholder: "packager 1.0.0; installed Roon version shown in the app"
     validations:
       required: true
   - type: dropdown

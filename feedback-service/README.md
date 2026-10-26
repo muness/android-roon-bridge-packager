@@ -3,9 +3,9 @@
 This local reference implementation receives explicit playback submissions and
 publishes reviewed recipe catalogs using Python 3 and SQLite. Its synthetic tests
 and fixtures exercise the shared wire contract without vendor binaries. Production
-hosting uses the dedicated Cloudflare Worker and D1 database in
-[HiPhi Cloud PR #158](https://github.com/open-horizon-labs/hiphi-cloud/pull/158). The Cloudflare deployment and remote transaction probe passed in [run 40373339138](https://github.com/open-horizon-labs/hiphi-cloud/actions/runs/40373339138). Listeners need no
-account or browser. Playback and saved settings work without the service.
+hosting is already configured in the Android app. Users submit results inside
+Roon Bridge; they do not need to run this service, create an account, or open a
+browser. Playback and saved settings work offline.
 
 `POST /v1/reports` accepts the exact v1 object in `fixtures/report.json`. All fields
 are required unless listed below. Unknown keys, raw logs, notes, names of endpoints,
@@ -107,49 +107,9 @@ authenticate the publisher. This v1 deliberately uses HTTPS host/account trust,
 not a claimed signed-release mechanism. The client keeps compatible cached/bundled
 rules, freezes active attempts and preserves locally heard working settings.
 
-## Production operations
+## Retention
 
-The production implementation lives in private HiPhi Cloud:
-
-- `edge/wrangler.playback.jsonc` declares the separate `hiphi-cloud-playback`
-  Worker and `PLAYBACK_DB` database binding.
-- `edge/src/playback/` owns strict validation, immutable receipts, reviewed
-  publication and public report/catalog routes.
-- `edge/scripts/playback-admin.mjs` is the private operator CLI. There is no
-  administrator HTTP route on the public Worker.
-- `docs/operations/playback-feedback.md` describes provisioning, deployment,
-  provider retention and rollback through the existing cloud workflow.
-
-The operator CLI reads its Cloudflare token from the environment, refuses other
-accounts/databases and resolves only an existing dedicated database. From HiPhi
-Cloud's `edge` directory, using Node 24 and installed dependencies:
-
-```sh
-node scripts/playback-admin.mjs check
-node scripts/playback-admin.mjs evidence /private/recipe.json
-node scripts/playback-admin.mjs review /private/review.json
-node scripts/playback-admin.mjs publish
-node scripts/playback-admin.mjs purge
-```
-
-Only the explicit private `evidence` command prints technical attempt bodies.
-Ordinary commands print receipts, identifiers or aggregate status; failures omit
-upstream response bodies, bound SQL values and credentials. Every administrative
-write first runs `verify-batch` against disposable probe rows, requiring both a
-successful two-statement batch and complete rollback of an invalid batch. Failed
-remote transaction behavior blocks review, publication and purge.
-The CLI uses Wrangler's official remote D1 binding with an isolated temporary
-configuration; it does not encode batch SQL through the REST query endpoint.
-No environment assertion can substitute for that live probe.
-
-The Cloudflare store bounds retained report/review/catalog payloads at 256 MiB and
-lifetime receipt tombstones at 100,000. This is a logical application budget,
-not a claim about physical D1 database size. Live evidence expires after 90 days;
-Cloudflare recovery storage has its own provider retention. Expiry does not claim
-physical secure deletion from provider backups. Published catalogs are retained,
-and receipt identities remain immutable so delayed retries cannot resurrect
-expired evidence. The hourly Worker schedule performs expiry without listener
-accounts or browser actions.
-
-Local tests establish contract behavior. Public deployment, provider controls and
-physical listening qualification require their own recorded checks.
+The hosted service retains live report evidence for 90 days. Recovery copies have
+their own retention window. Reviewed recipes and minimal receipt identities can
+remain after report expiry so delayed retries do not recreate expired evidence.
+The Android app never requires users to administer the service.
