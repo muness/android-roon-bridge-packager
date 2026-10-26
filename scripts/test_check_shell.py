@@ -111,6 +111,11 @@ class ShellAuditTest(unittest.TestCase):
       A: android:value(0x01010024)="https://other.example.test"
 '''
         self.assertEqual('https://playback.example.test', check_shell.manifest_service_url(dump))
+        # SDK35 emits the namespace URI instead of the android prefix.
+        qualified = dump.replace('A: android:', 'A: http://schemas.android.com/apk/res/android:')
+        self.assertEqual('https://playback.example.test', check_shell.manifest_service_url(qualified))
+        with self.assertRaisesRegex(ValueError, 'exactly one literal'):
+            check_shell.manifest_service_url(qualified + qualified)
         with self.assertRaisesRegex(ValueError, 'exactly one literal'):
             check_shell.manifest_service_url(dump.replace(
                 'A: android:value(0x01010024)="https://playback.example.test"',

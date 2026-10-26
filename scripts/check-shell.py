@@ -106,7 +106,7 @@ def manifest_service_url(dump):
         if re.match(r'E: meta-data(?:\s|$)', stripped):
             attrs, indent = {}, depth
         elif attrs is not None:
-            match = re.match(r'A: android:(name|value)\([^)]*\)="([^"]*)"', stripped)
+            match = re.match(r'A: (?:android:|http://schemas.android.com/apk/res/android:)(name|value)\([^)]*\)="([^"]*)"', stripped)
             if match:
                 attrs[match.group(1)] = match.group(2)
     if len(matches) != 1 or matches[0] is None:
