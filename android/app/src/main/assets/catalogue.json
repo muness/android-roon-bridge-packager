@@ -17,7 +17,7 @@
       "licence": {
         "title": "You are downloading Roon Labs' software",
         "vendorUrl": "https://roon.app/en/termsandconditions",
-        "text": "This app does not contain Roon Bridge. Your device downloads it directly from Roon Labs and packs your copy locally into a separately downloaded app shell. The packager does not upload the archive or generated APK. Each copied file is checked for byte identity before installation.\n\nRoon's software terms apply to the download and its use. Those terms restrict copying, incorporation into other programs and providing copies to others. Downloading directly and preserving bytes do not establish permission to repackage. Proceed only if you have the necessary rights. Do not distribute the generated APK.\n\nThis independent experimental tool is not affiliated with, endorsed by, or approved by Roon Labs."
+        "text": "This app does not contain Roon Bridge. Your device downloads it directly from Roon Labs and packs your copy locally into a separately downloaded app shell. The packager does not upload the archive or generated APK. Each copied file is checked for byte identity before installation.\n\nRoon's software terms apply to the download and its use. Those terms restrict copying, incorporation into other programs and providing copies to others. Downloading directly and preserving bytes do not establish permission to repackage. Proceed only if you have the necessary rights. Do not distribute the generated APK.\n\nThis independent tool is not affiliated with, endorsed by, or approved by Roon Labs."
       },
       "shell": {
         "url": "https://hiphi-roon-downloads.open-horizons.workers.dev/artifacts/57dffc0b0875eda23708596c263fd2562736f568707550c717f07af21b3f6420/roon-shell.apk",
@@ -62,8 +62,8 @@
         ],
         "supplements": [
           {
-            "url": "https://deb.debian.org/debian/pool/main/g/glibc/libc6_2.41-12+deb13u3_arm64.deb",
-            "sha256": "ff529924782d3286181188fc265a6a92e7fe28975fb3a925dc0e05c0ca66e52f",
+            "url": "https://snapshot.debian.org/file/6ee536e6a461ca319776fac983202946f4d3dce8",
+            "sha256": "8784eda966b189c777a384dac5ce009e8fc9b52d006926c5a013e7fa8aa688cc",
             "format": "deb",
             "required": true,
             "members": [
@@ -88,7 +88,7 @@
             ]
           },
           {
-            "url": "https://deb.debian.org/debian/pool/main/o/openssl/libssl3t64_3.5.6-1~deb13u2_arm64.deb",
+            "url": "https://snapshot.debian.org/file/6e3fe344496850bb946e702685bacc5df1332dab",
             "sha256": "f7e09a12ccb2d6bd28bcc87a6e2462a0558dcb3cc34d56f90ee86fbd3402d8ba",
             "format": "deb",
             "required": true,
@@ -108,7 +108,7 @@
             ]
           },
           {
-            "url": "https://deb.debian.org/debian/pool/main/z/zlib/zlib1g_1.3.dfsg+really1.3.1-1+b1_arm64.deb",
+            "url": "https://snapshot.debian.org/file/37dbdb01f106b4b2246e8b4e2a09988081baae4d",
             "sha256": "209aa5cf671e97b9eb0410844fa6df4cae2e75b0c72e7802ab6c8ece13e6ddef",
             "format": "deb",
             "required": true,
@@ -122,7 +122,7 @@
             ]
           },
           {
-            "url": "https://deb.debian.org/debian/pool/main/libz/libzstd/libzstd1_1.5.7+dfsg-1_arm64.deb",
+            "url": "https://snapshot.debian.org/file/fb2129135f3cc38e40faa0d7cdc7bc0048955075",
             "sha256": "924540bd59fdbfa77a0604360efdaca54411a43daf11c7e002a3c64791b67448",
             "format": "deb",
             "required": true,
